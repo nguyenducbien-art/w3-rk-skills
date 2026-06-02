@@ -14,8 +14,7 @@ description: >
 
 Review an existing 結合テスト仕様書 against the real screen and the W3 conventions, then report
 Add / Modify / Delete. **READ-ONLY** — the only file written is the review report; never edit the
-reviewed TC file or the application source. Communicate with the user in **the current language of
-the conversation**.
+reviewed TC file or the application source. Communicate with the user in **their language (default English)**.
 
 ## Input
 
@@ -82,7 +81,7 @@ A single review report at
   `project-config.md`); never mutate. DB present but misconfigured / path failure → ask the user;
   **no Docker/DB at all → source-only mode** (review from code + docs, §3.3).
 - This skill **reports**; it does not rewrite TCs and does not emit a fix-prompt (separate concern).
-- Communicate in the current language of the conversation; the report file is in English; code/comments English or Japanese only.
+- Communicate in the user's language (default English); the report file is in English; code/comments English or Japanese only.
 
 ## Portability
 

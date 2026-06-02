@@ -14,8 +14,8 @@ description: >
 # W3 Integration Test Generation
 
 Generate the 結合テスト仕様書 for one W3 Mimosa screen **from source, not guesswork**. All knowledge
-lives in `references/`; this file is the conductor. Communicate with the user in **Vietnamese**;
-code/comments are **English or Japanese only**.
+lives in `references/`; this file is the conductor. Communicate with the user in **their language
+(default English)**; code/comments are **English or Japanese only**.
 
 ## Input
 

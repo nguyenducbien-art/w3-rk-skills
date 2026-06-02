@@ -1,7 +1,7 @@
 # Report Format
 
 > The review reads like a senior QA's own notes — **human, not robotic**. **Write the report file
-> in English** (chat with the user stays Vietnamese; the `.md` deliverable is English). Findings are
+> in English** (chat with the user is in their language, default English; the `.md` deliverable is English). Findings are
 > grouped into **3 severity tiers and sorted most-severe → lightest**. Write to
 > `<cwd>/w3-rk-skills-output/w3-integration-test/review/<slug>(screen_id=<X>)/TC-review_<alias>_(screen_id=<X>).md`. Do not edit the TC file.
 

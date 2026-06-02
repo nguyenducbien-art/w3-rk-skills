@@ -49,4 +49,4 @@
   the dumped TCs.
 - Local DB (when one exists): read-only queries to confirm screen metadata are fine (preflight per
   `project-config.md`); do not mutate. No Docker/DB → source-only mode (§3.3); DB misconfigured → ask (§3.2).
-- Communicate with the user in the current language of the conversation; the report file is in English (see `report-format.md`).
+- Communicate with the user in their language (default English); the report file is in English (see `report-format.md`).

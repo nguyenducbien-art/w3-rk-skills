@@ -115,8 +115,8 @@ rest of the session (and offer to update this file). Ask concisely, e.g.:
 > container** name, the **database** name, and **user/password** — or run the SQL yourself
 > and paste the result."
 
-(Phrase the actual question to the user in Vietnamese per SKILL.md's communication rule; the
-example above is in English only because skill files are kept English.)
+(Phrase the actual question to the user in their language — default English — per SKILL.md's
+communication rule; the example above is the wording to use, since skill files are kept English.)
 
 Never: invent a container name, try random names in a loop, or fall back to stg. When a DB
 genuinely exists, prefer it over the source-only fallback — but a **wrong cred** does not force
@@ -125,7 +125,7 @@ the session to halt forever: if the user says "no DB / just use the source", swi
 ### 3.3. 🟢 No DB / no Docker → SOURCE-ONLY mode (generate 100% from code + docs)
 
 When there is no DB to reach (per §3.1 classification), or the user states the machine has no
-Docker/DB, **announce it once** ("Máy không có DB → mình gen TC 100% từ source code + docs") and
+Docker/DB, **announce it once** ("No DB on this machine → generating TCs 100% from source code + docs") and
 generate from source. The DB only ever **confirmed** metadata; the real ground truth is the code.
 Replace each DB query (`analyze-screen.md` §DB metadata query) with its source/doc equivalent:
 
