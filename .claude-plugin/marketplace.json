@@ -1,0 +1,12 @@
+{
+  "name": "w3-rk-skills",
+  "owner": { "name": "BienND" },
+  "description": "Rikkeisoft W3 (sirius/mimosa) migration skills — Claude Code marketplace.",
+  "plugins": [
+    {
+      "name": "w3-integration-test",
+      "source": "./plugins/w3-integration-test",
+      "description": "Generate + review integration test-case specs (結合テスト仕様書) for W3 Mimosa AngularJS → Next.js migration screens."
+    }
+  ]
+}

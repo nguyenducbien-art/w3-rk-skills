@@ -1,0 +1,319 @@
+﻿№,大分類,中分類,小分類,正常/異常,PRE-CONDITION,前提条件,STEPS,実施内容,EXPECTED RESULT,確認事項
+1. 共通確認,,,,,,,,,,
+1,ページタイトル,,,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,1. Verify the browser tab title of the screen.,1. 画面のブラウザタブのタイトルを確認する。,1. The page title is 「W3 mimosa | 商品追加・編集」.,1. ページタイトルが「W3 mimosa | 商品追加・編集」であること。
+2,ヘッダー,,,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,1. Verify the header area.,1. ヘッダー部を確認する。,1. The displayed items in the header are the same as those in the AngularJS system.,1. ヘッダーに表示される項目が、AngularJS版と一致すること。
+3,フッター,,,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,1. Verify the footer area.,1. フッター部を確認する。,1. The displayed items in the footer are the same as those in the AngularJS system.,1. フッターに表示される項目が、AngularJS版と一致すること。
+4,メニュー,,,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Verify the menu.
+2. Click each menu item.","1. メニューを確認する。
+2. 各メニュー項目をクリックする。","1. The displayed items in the menu are the same as those in the AngularJS system.
+2. Each menu item navigates to the correct destination.","1. メニューに表示される項目が、AngularJS版と一致すること。
+2. 各メニュー項目が正しい遷移先に遷移すること。"
+2. 表示確認,,,,,,,,,,
+5,画面表示,画面の非表示設定（is_display=0）,,正常,"1. Run SQL to hide the [商品関連_商品追加・編集 (screen_id=430)] screen for the test role:
+UPDATE unit_screens SET is_display = 0 WHERE screen_id = 430 AND unit_roll_id = <test_user_roll>;","1. テストロール向けに「商品関連_商品追加・編集（screen_id=430）」画面を非表示にするSQLを実行する：
+UPDATE unit_screens SET is_display = 0 WHERE screen_id = 430 AND unit_roll_id = <test_user_roll>;","1. Run the setup SQL.
+2. Try to open the screen via its URL.","1. 設定用SQLを実行する。
+2. 画面のURLから当画面を開こうとする。","1. -
+2. The screen is not accessible and is redirected to the top screen.","1. -
+2. 当画面にアクセスできず、トップ画面へリダイレクトされること。"
+6,初期表示,新規登録モード,空フォーム表示,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,1. Verify the initial display of the screen opened in new-registration mode.,1. 新規登録モードで開いた画面の最初の表示を確認する。,"1.1 An empty input form is displayed (no product is loaded into the fields).
+1.2 Both the 「基本情報」 and 「その他情報」 sections are expanded by default.","1.1 空の入力フォームが表示されること（フォームに商品が読み込まれていないこと）。
+1.2 「基本情報」「その他情報」の両セクションが初期状態で開いていること。"
+7,項目表示,基本情報・その他情報,入力項目のデフォルト表示,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,1. Verify the input fields displayed in the 「基本情報」 and 「その他情報」 sections.,1. 「基本情報」「その他情報」セクションに表示される入力項目を確認する。,"1. The displayed fields, their labels and their order are the same as those in the AngularJS version.",1. 表示される入力項目・ラベル・並び順が、AngularJS版と一致すること。
+8,項目表示,ドロップダウン初期値,商品カテゴリ・ブランド・商品販促区分,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Verify the 商品カテゴリ, ブランド and 商品販促区分 dropdowns at the initial display of new-registration mode.",1. 新規登録モードの初期表示時に、商品カテゴリ・ブランド・商品販促区分のドロップダウンを確認する。,"1. Each of the three dropdowns auto-selects a default value (not blank) on load, the same as the AngularJS version (so the required value is always satisfied).",1. 3つのドロップダウンが読み込み時に既定値を自動選択（空白でない）し、AngularJS版と同一であること（必須値が常に満たされること）。
+9,UIラベル,ボタン・見出し,文言確認,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Verify the action-area button labels, the section headers and the guidance message.",1. アクションエリアのボタンラベル、セクション見出し、案内メッセージを確認する。,"1.1 The 「登録」 and 「キャンセル」 buttons are displayed in the action area.
+1.2 The 「全て開く」 and 「全て閉じる」 buttons are displayed in the 「基本情報」 section header.
+1.3 The section headers 「基本情報」 and 「その他情報」 are displayed.
+1.4 The guidance message 「当画面では、商品を登録・編集できます。複数選択時は、基本情報のみの編集となり、選択した全てに反映されます。」 is displayed.","1.1 アクションエリアに「登録」「キャンセル」ボタンが表示されること。
+1.2 「基本情報」セクション見出しに「全て開く」「全て閉じる」ボタンが表示されること。
+1.3 セクション見出し「基本情報」「その他情報」が表示されること。
+1.4 案内メッセージ「当画面では、商品を登録・編集できます。複数選択時は、基本情報のみの編集となり、選択した全てに反映されます。」が表示されること。"
+10,カラーコード,編集モード初期表示,#プレフィックス表示,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).
+2. The selected product has a カラーコード value saved.","1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。
+2. 選択した商品にカラーコードの値が保存されている状態にする。",1. Verify the カラーコード field in the 「その他情報」 section.,1. 「その他情報」セクションのカラーコード欄を確認する。,"1. The saved color code is displayed with a 「#」 prefix (e.g. a stored value of ""ff0000"" is shown as 「#ff0000」), and the color swatch / palette reflects that color.",1. 保存されているカラーコードが「#」付きで表示され（保存値「ff0000」→「#ff0000」表示）、カラースウォッチ／パレットがその色を反映していること。
+11,項目表示,編集モード ― ドロップダウン保存値,商品カテゴリ・ブランド・商品販促区分,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).
+2. The selected product has values saved for 商品カテゴリ / ブランド / 商品販促区分.","1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。
+2. 選択した商品に、商品カテゴリ／ブランド／商品販促区分の値が保存されている状態にする。","1. Verify the 商品カテゴリ, ブランド and 商品販促区分 dropdowns in edit mode.",1. 編集モードで、商品カテゴリ・ブランド・商品販促区分のドロップダウンを確認する。,1. Each of the three dropdowns shows the value saved for the selected product (it is not reset to the default first option).,1. 3つのドロップダウンが、選択した商品に保存されている値を表示すること（先頭の既定値にリセットされないこと）。
+3. バリデーション確認,,,,,,,,,,
+12,商品コード,必須入力,未入力,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Leave the 商品コード field empty and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 商品コードを空欄にし、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that 商品コード is required, the loading indicator is hidden, no data is saved, the screen stays on the 商品追加・編集 form, and the entered values are kept.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 商品コードが必須である旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、商品追加・編集フォームに留まり、入力値が保持されること。"
+13,商品コード,文字数,境界値 ― 上限ちょうど（200文字）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter exactly 200 characters in the 商品コード field and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Click 「OK」 on the success popup.","1. 商品コードにちょうど200文字を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップで「OK」をクリックする。","1. -
+2. The 200-character 商品コード passes the max-length check (no length error), and the success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+3. The screen is navigated to 商品関連_商品マスタ (screen_id=429) and the 200-character 商品コード is saved.","1. -
+2. 200文字の商品コードが最大文字数チェックを通過し（文字数エラーなし）、成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+3. 商品関連_商品マスタ（screen_id=429）へ遷移し、200文字の商品コードが保存されること。"
+14,商品コード,文字数,境界値 ― 上限超過（201文字）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 201 characters in the 商品コード field and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 商品コードに201文字を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that 商品コード exceeds the maximum length (200 characters), the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 商品コードが最大文字数（200文字）を超えている旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+15,商品コード,重複チェック,既存コードと重複,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).
+2. A product with the 商品コード ""EXISTING-CD"" already exists for the current owner.","1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。
+2. 現在の荷主に商品コード「EXISTING-CD」の商品が既に登録されている状態にする。","1. Enter the already existing 商品コード ""EXISTING-CD"" and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 既に存在する商品コード「EXISTING-CD」を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that the 商品コード already exists, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 商品コードが既に存在する旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+16,商品コード,編集時重複チェック,変更なしで登録（自商品は対象外）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Keep the 商品コード unchanged (the product's own existing code), change another field, and click the 「登録」 button.
+2. Click 「OK」 on the success popup.","1. 商品コードを変更せず（その商品自身の既存コードのまま）、他の項目を変更して「登録」ボタンをクリックする。
+2. 成功ポップアップで「OK」をクリックする。","1. No duplicate error occurs (the uniqueness check excludes the product itself), and the success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+2. The screen is navigated to 商品関連_商品マスタ (screen_id=429) and the changes are saved.","1. 重複エラーが発生せず（重複チェックはその商品自身を対象外とする）、成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+2. 商品関連_商品マスタ（screen_id=429）へ遷移し、変更が保存されること。"
+17,商品コード,編集時重複チェック,他商品の既存コードに変更,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).
+2. Another product with the 商品コード ""OTHER-CD"" already exists for the current owner.","1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。
+2. 現在の荷主に、商品コード「OTHER-CD」の別の商品が既に登録されている状態にする。","1. Change the 商品コード to ""OTHER-CD"" (another existing product's code) and click the 「登録」 button.
+2. Observe the screen.","1. 商品コードを「OTHER-CD」（別の既存商品のコード）に変更して「登録」ボタンをクリックする。
+2. 画面を確認する。","1. -
+2. An error modal is displayed with the server validation message indicating that the 商品コード already exists, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 商品コードが既に存在する旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+18,商品名1,必須入力,未入力,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Leave the 商品名1 field empty and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 商品名1を空欄にし、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that 商品名1 is required, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 商品名1が必須である旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+19,商品名1,文字数,境界値 ― 上限超過（201文字）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 201 characters in the 商品名1 field and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 商品名1に201文字を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that 商品名1 exceeds the maximum length (200 characters), the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 商品名1が最大文字数（200文字）を超えている旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+20,入荷限界設定日数,必須入力,未入力（数値6項目共通）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Leave the 入荷限界設定日数 field empty (representative of the 6 numeric required fields: 入荷限界設定日数 / 出荷限界設定日数 / 適正在庫未引当数 / 発注点未引当数 / 安全在庫未引当数 / 長期滞留設定日数) and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 入荷限界設定日数を空欄にし（数値必須6項目の代表：入荷限界設定日数／出荷限界設定日数／適正在庫未引当数／発注点未引当数／安全在庫未引当数／長期滞留設定日数）、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that the numeric field is required, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 当該数値項目が必須である旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+21,入荷限界設定日数,数値範囲,境界値 ― 下限ちょうど（0）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 0 in the 入荷限界設定日数 field (representative of the 6 numeric fields) and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Click 「OK」 on the success popup.","1. 入荷限界設定日数（数値6項目の代表）に 0 を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップで「OK」をクリックする。","1. -
+2. 0 is accepted as a valid value (min:0 allows 0, no error), and the success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+3. The screen is navigated to 商品関連_商品マスタ (screen_id=429) and the value 0 is saved.","1. -
+2. 0 が有効値として受け付けられ（min:0 のため 0 は許容、エラーなし）、成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+3. 商品関連_商品マスタ（screen_id=429）へ遷移し、値 0 が保存されること。"
+22,入荷限界設定日数,数値範囲,境界値 ― 下限未満（-1）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter -1 in the 入荷限界設定日数 field (representative of the 6 numeric fields) and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 入荷限界設定日数（数値6項目の代表）に -1 を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that the value must be 0 or greater, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 値が 0 以上でなければならない旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+23,入荷限界設定日数,数値範囲,数値以外 ― 小数（1.5）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 1.5 in the 入荷限界設定日数 field (representative of the 6 numeric fields) and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 入荷限界設定日数（数値6項目の代表）に 1.5 を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that the value must be an integer, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 値が整数でなければならない旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+24,入荷限界設定日数,数値範囲,数値以外 ― 文字入力（UI制限）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Try to type letters or symbols (e.g. ""abc"") in the 入荷限界設定日数 number field (representative of the 6 numeric fields).
+2. Observe the field value.","1. 入荷限界設定日数（数値6項目の代表）の数値入力欄に文字や記号（例：「abc」）を入力しようとする。
+2. 項目の値を確認する。","1. -
+2. The number field does not accept the non-numeric characters; the value stays empty / unchanged.","1. -
+2. 数値入力欄が数値以外の文字を受け付けず、値が空欄／変化しないこと。"
+25,入荷限界設定日数,数値範囲,境界値 ― 上限ちょうど（2147483647）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 2147483647 (the upper limit of the database integer column) in the 入荷限界設定日数 field (representative of the 6 numeric fields) and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Click 「OK」 on the success popup.","1. 入荷限界設定日数（数値6項目の代表）に 2147483647（DB の integer 列の上限）を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップで「OK」をクリックする。","1. -
+2. The value 2147483647 is accepted (it is within the allowed integer range and the validation rule has no maximum), and the success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+3. The screen is navigated to 商品関連_商品マスタ (screen_id=429) and the value is saved.","1. -
+2. 値 2147483647 が受け付けられ（integer 範囲内かつバリデーションに上限がないため）、成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+3. 商品関連_商品マスタ（screen_id=429）へ遷移し、値が保存されること。"
+26,入荷限界設定日数,数値範囲,境界値 ― 上限超過（2147483648・桁あふれ）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 2147483648 (one over the database integer upper limit; or a larger value such as 9999999999) in the 入荷限界設定日数 field (representative of the 6 numeric fields) and fill the other required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 入荷限界設定日数（数値6項目の代表）に 2147483648（DB の integer 列の上限を1超える値。または 9999999999 のような大きい値）を入力し、他の必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed because the value exceeds the database integer range and cannot be saved; the loading indicator is hidden, no data is saved, and the screen stays on the form. (Verify the exact error message on staging.)","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 値が DB の integer 範囲を超えて保存できないためエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。（正確なエラーメッセージはステージングで確認すること。）"
+27,備考,文字数,境界値 ― 上限ちょうど（1000文字）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter exactly 1000 characters in the 備考 field and fill the required fields with valid values.
+2. Click the 「登録」 button.
+3. Click 「OK」 on the success popup.","1. 備考にちょうど1000文字を入力し、必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップで「OK」をクリックする。","1. -
+2. The 1000-character 備考 passes the max-length check (no length error), and the success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+3. The screen is navigated to 商品関連_商品マスタ (screen_id=429) and the 1000-character 備考 is saved.","1. -
+2. 1000文字の備考が最大文字数チェックを通過し（文字数エラーなし）、成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+3. 商品関連_商品マスタ（screen_id=429）へ遷移し、1000文字の備考が保存されること。"
+28,備考,文字数,境界値 ― 上限超過（1001文字）,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Enter 1001 characters in the 備考 field and fill the required fields with valid values.
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 備考に1001文字を入力し、必須項目には有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed with the server validation message indicating that 備考 exceeds the maximum length (1000 characters), the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 備考が最大文字数（1000文字）を超えている旨のサーバーバリデーションメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+29,必須項目,全必須項目未入力,エラー一覧表示,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Leave ALL enterable required fields empty (商品コード / 商品名1 / 入荷限界設定日数 / 出荷限界設定日数 / 適正在庫未引当数 / 発注点未引当数 / 安全在庫未引当数 / 長期滞留設定日数 — the dropdown 商品販促区分 is auto-filled and cannot be blank).
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 入力可能な必須項目をすべて空欄にする（商品コード／商品名1／入荷限界設定日数／出荷限界設定日数／適正在庫未引当数／発注点未引当数／安全在庫未引当数／長期滞留設定日数 ― ドロップダウンの商品販促区分は自動選択され空欄にできない）。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent to the server.
+3. An error modal is displayed listing the server validation messages for the empty required fields, the loading indicator is hidden, no data is saved, and the screen stays on the form.","1. -
+2. 登録リクエストがサーバーへ送信されること。
+3. 空欄の各必須項目についてのサーバーバリデーションメッセージが一覧表示されるエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、フォームに留まること。"
+30,必須項目,編集時クリア,必須項目を空にして登録（更新されない）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Clear a required field (e.g. 商品コード) while keeping the other fields valid, then click the 「登録」 button.
+2. Click 「OK」 on the success popup.","1. 必須項目（例：商品コード）を空にし、他の項目は有効なままで「登録」ボタンをクリックする。
+2. 成功ポップアップで「OK」をクリックする。","1. No validation error occurs (in edit mode a cleared field is simply not sent, so the required rule is skipped), and the success popup (I001) is displayed.
+2. The screen is navigated to 商品関連_商品マスタ (screen_id=429); the cleared required field keeps its previous value (it is not updated), while the other changes are saved.","1. バリデーションエラーが発生せず（編集モードでは空にした項目は送信されないため、必須チェックがスキップされる）、成功ポップアップ（I001）が表示されること。
+2. 商品関連_商品マスタ（screen_id=429）へ遷移し、空にした必須項目は旧値が保持され（更新されず）、他の変更は保存されること。"
+4. 業務処理の確認,,,,,,,,,,
+4.1 業務処理の確認,,,,,,,,,,
+31,初期表示,編集モード,データ反映,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,1. Verify the initial display of the screen opened in edit mode.,1. 編集モードで開いた画面の最初の表示を確認する。,1. The data of the selected product is retrieved and correctly mapped to the corresponding input fields of the 「基本情報」 and 「その他情報」 sections (the カラーコード is shown with a 「#」 prefix).,1. 選択した商品のデータが取得され、「基本情報」「その他情報」の各入力項目に正しく反映されること（カラーコードは「#」付きで表示されること）。
+32,登録,新規登録,成功,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Fill all required fields with valid values.
+2. Click the 「登録」 button.
+3. Click 「OK」 on the success popup.","1. すべての必須項目に有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップで「OK」をクリックする。","1. -
+2.1. The success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+2.2. The loading indicator is hidden.
+3.1. The screen is navigated to 商品関連_商品マスタ (screen_id=429).
+3.2. The new product is registered and a default 荷姿「ばら」 (unit 点, quantity 1) is automatically created for it.","1. -
+2.1. 成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+2.2. 読み込み中の表示が消えること。
+3.1. 商品関連_商品マスタ（screen_id=429）へ遷移すること。
+3.2. 新規商品が登録され、その商品に対して既定の荷姿「ばら」（単位「点」、数量1）が自動的に作成されること。"
+33,登録,編集更新,成功,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Change one or more field values (keeping the required fields valid).
+2. Click the 「登録」 button.
+3. Click 「OK」 on the success popup.","1. いずれかの項目の値を変更する（必須項目は有効な値のままにする）。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップで「OK」をクリックする。","1. -
+2.1. The success popup (I001) with title 「正常完了」 and message 「正常に完了しました。」 is displayed.
+2.2. The loading indicator is hidden.
+3.1. The screen is navigated to 商品関連_商品マスタ (screen_id=429).
+3.2. The changed values are saved to the product.","1. -
+2.1. 成功ポップアップ（I001）がタイトル「正常完了」、メッセージ「正常に完了しました。」で表示されること。
+2.2. 読み込み中の表示が消えること。
+3.1. 商品関連_商品マスタ（screen_id=429）へ遷移すること。
+3.2. 変更した値が商品に保存されること。"
+34,登録,編集更新 ― 任意項目クリア,空文字で更新,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).
+2. The selected product has a value in an optional field such as 商品名2.","1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。
+2. 選択した商品の任意項目（例：商品名2）に値が入っている状態にする。","1. Clear an optional field (e.g. 商品名2) and click the 「登録」 button.
+2. Click 「OK」 on the success popup.","1. 任意項目（例：商品名2）を空にして「登録」ボタンをクリックする。
+2. 成功ポップアップで「OK」をクリックする。","1. The success popup (I001) is displayed.
+2. The screen is navigated to 商品関連_商品マスタ (screen_id=429), and the cleared optional field is updated to empty (its value is removed).","1. 成功ポップアップ（I001）が表示されること。
+2. 商品関連_商品マスタ（screen_id=429）へ遷移し、空にした任意項目が空で更新されること（値が削除されること）。"
+35,登録,編集更新 ― 部分更新,1項目のみ変更、他は保持,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Change only one field (e.g. 商品名1) and leave all the other fields as loaded, then click the 「登録」 button.
+2. Click 「OK」 on the success popup, then reopen the same product in edit mode.","1. 1項目のみ（例：商品名1）を変更し、他の項目は読み込まれたままにして「登録」ボタンをクリックする。
+2. 成功ポップアップで「OK」をクリックし、同じ商品を編集モードで再度開く。","1. The success popup (I001) is displayed.
+2. Only the changed field is updated; all the other fields keep their previous values (no unintended changes).","1. 成功ポップアップ（I001）が表示されること。
+2. 変更した項目のみが更新され、他の項目は旧値が保持されること（意図しない変更がないこと）。"
+36,登録,「登録」ボタンをクリックする,読み込み中・二重送信防止,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Fill all required fields with valid values.
+2. Click the 「登録」 button.
+3. While the loading indicator is shown, click the 「登録」 button again.","1. すべての必須項目に有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 読み込み中の表示が出ている間に、再度「登録」ボタンをクリックする。","1. -
+2. The loading indicator is displayed immediately while the request is processed.
+3. The second click is not accepted while loading; the save request is sent only once.","1. -
+2. 処理中、読み込み中の表示がすぐに表示されること。
+3. 読み込み中は2回目のクリックが受け付けられず、登録リクエストが1回のみ送信されること。"
+37,キャンセル,確認モーダル（Q003）,OK ― 遷移,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Click the 「キャンセル」 button.
+2. Click 「OK」 on the confirmation popup.","1. 「キャンセル」ボタンをクリックする。
+2. 確認ポップアップで「OK」をクリックする。","1. A confirmation popup (Q003) with title 「警告」 and message 「入力された内容が登録されませんがよろしいですか？」 is displayed.
+2. The screen is navigated to 商品関連_商品マスタ (screen_id=429) without saving any input.","1. 確認ポップアップ（Q003）がタイトル「警告」、メッセージ「入力された内容が登録されませんがよろしいですか？」で表示されること。
+2. 入力内容を保存せずに商品関連_商品マスタ（screen_id=429）へ遷移すること。"
+38,キャンセル,確認モーダル（Q003）,キャンセル,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Click the 「キャンセル」 button.
+2. Click 「キャンセル」 on the confirmation popup.","1. 「キャンセル」ボタンをクリックする。
+2. 確認ポップアップで「キャンセル」をクリックする。","1. A confirmation popup (Q003) with title 「警告」 and message 「入力された内容が登録されませんがよろしいですか？」 is displayed.
+2. The popup is closed and the screen stays on the 商品追加・編集 form (no navigation).","1. 確認ポップアップ（Q003）がタイトル「警告」、メッセージ「入力された内容が登録されませんがよろしいですか？」で表示されること。
+2. ポップアップが閉じ、商品追加・編集フォームに留まり遷移しないこと。"
+39,全て開く・全て閉じる,アコーディオン一括開閉,,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Click the 「全て閉じる」 button.
+2. Click the 「全て開く」 button.","1. 「全て閉じる」ボタンをクリックする。
+2. 「全て開く」ボタンをクリックする。","1. Both the 「基本情報」 and 「その他情報」 sections are collapsed (their input fields are hidden).
+2. Both the 「基本情報」 and 「その他情報」 sections are expanded (their input fields are shown).","1. 「基本情報」「その他情報」の両セクションが閉じ、入力項目が非表示になること。
+2. 「基本情報」「その他情報」の両セクションが開き、入力項目が表示されること。"
+40,基本情報・その他情報,アコーディオン個別開閉,,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, check exactly one product row, then click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in edit mode (the form is pre-filled with the selected product).",1. 「商品関連_商品マスタ（screen_id=429）」画面で商品を1行だけチェックし、「商品追加・編集」ボタンをクリックして「商品関連_商品追加・編集（screen_id=430）」画面を編集モードで開く（選択した商品の内容がフォームに表示される）。,"1. Click the 「基本情報」 section header.
+2. Click the 「その他情報」 section header.","1. 「基本情報」セクション見出しをクリックする。
+2. 「その他情報」セクション見出しをクリックする。","1. The 「基本情報」 section is collapsed (clicking the header again expands it).
+2. The 「その他情報」 section is collapsed (clicking the header again expands it).","1. 「基本情報」セクションが閉じること（見出しを再度クリックすると開くこと）。
+2. 「その他情報」セクションが閉じること（見出しを再度クリックすると開くこと）。"
+41,カラーコード,カラーパレット,色選択,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. In the 「その他情報」 section, select a color from the カラーコード color palette.
+2. Verify the カラーコード field.","1. 「その他情報」セクションで、カラーコードのカラーパレットから色を選択する。
+2. カラーコード欄を確認する。","1. -
+2. The selected color value is reflected in the カラーコード field as a 「#」-prefixed hex code (e.g. 「#FF0000」).","1. -
+2. 選択した色がカラーコード欄に「#」付きの16進コード（例：「#FF0000」）で反映されること。"
+42,カラーコード,パレット・ピッカー同期,値の連動,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Select a color in the カラーコード color palette.
+2. Pick a different color in the カラーコード color picker.","1. カラーコードのカラーパレットで色を選択する。
+2. カラーコードのカラーピッカーで別の色を選ぶ。","1. The color picker swatch and the displayed hex text both update to match the color selected in the palette.
+2. The palette and the displayed hex text both update to match the color picked in the color picker (palette, picker and text value stay in sync).","1. カラーピッカーのスウォッチと表示中の16進テキストの両方が、パレットで選択した色に更新されること。
+2. パレットと表示中の16進テキストの両方が、カラーピッカーで選んだ色に更新されること（パレット・ピッカー・表示値が連動すること）。"
+43,カラーコード,カラーピッカー直接入力,16進コード入力,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. In the カラーコード color picker input box, type a hex color code directly (e.g. ""00FF00"").
+2. Confirm the input.","1. カラーコードのカラーピッカーの入力欄に、16進カラーコード（例：「00FF00」）を直接入力する。
+2. 入力を確定する。","1. -
+2. The typed color is reflected in the カラーコード field, and the color swatch / palette updates to match it.","1. -
+2. 入力した色がカラーコード欄に反映され、カラースウォッチ／パレットがその色に更新されること。"
+44,カラーコード,登録,#除去・再表示（ラウンドトリップ）,正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Set a color (e.g. 「#FF0000」) in the カラーコード field, fill the other required fields with valid values, and click the 「登録」 button.
+2. On 商品関連_商品マスタ (screen_id=429), select the product just registered and open its 商品追加・編集 edit form again.
+3. Verify the カラーコード field.","1. カラーコードに色（例：「#FF0000」）を設定し、他の必須項目に有効な値を入力して「登録」ボタンをクリックする。
+2. 商品関連_商品マスタ（screen_id=429）で、今登録した商品を選択して商品追加・編集の編集フォームを再度開く。
+3. カラーコード欄を確認する。","1. The product is saved successfully (the 「#」 is removed from the color code on save) and the screen is navigated to 商品関連_商品マスタ (screen_id=429).
+2. -
+3. The same color is displayed again with the 「#」 prefix (e.g. 「#FF0000」); the color value is preserved through the save-and-reopen round-trip.","1. 商品が正常に保存され（保存時にカラーコードから「#」が除去される）、商品関連_商品マスタ（screen_id=429）へ遷移すること。
+2. -
+3. 同じ色が再び「#」付き（例：「#FF0000」）で表示され、保存・再表示のラウンドトリップで色の値が保持されていること。"
+4.2 その他処理の確認,,,,,,,,,,
+45,登録,APIエラー・通信エラー,サーバーエラーモーダル,異常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).",1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。,"1. Make the save request fail at the server or network level (e.g. block the connection, or trigger a business error).
+2. Click the 「登録」 button.
+3. Observe the screen.","1. 登録リクエストがサーバー側またはネットワーク側で失敗する状態にする（例：接続を遮断する、または業務エラーを発生させる）。
+2. 「登録」ボタンをクリックする。
+3. 画面を確認する。","1. -
+2. The save request is sent.
+3. An error modal is displayed with the server-returned message, the loading indicator is hidden, no data is saved, and the screen stays on the 商品追加・編集 form (the button can be clicked again).","1. -
+2. 登録リクエストが送信されること。
+3. サーバーが返したメッセージのエラーモーダルが表示され、読み込み中の表示が消え、データが保存されず、商品追加・編集フォームに留まること（ボタンを再度クリックできること）。"
+5. 性能確認,,,,,,,,,,
+46,応答時間,画面応答時間,"商品マスタ30,000件存在時の表示",正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).
+2. The current owner already has about 30,000 products (商品) registered (a large-data state).","1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。
+2. 現在の荷主に、約30,000件の商品が登録されている状態（大量データの状態）にする。","1. Open the 商品追加・編集 screen (in both new-registration mode and edit mode).
+2. Measure the display response and operate the form.","1. 商品追加・編集画面を開く（新規登録モード・編集モードの両方）。
+2. 表示の応答を計測し、フォームを操作する。","1. -
+2. Even though about 30,000 products already exist in the database, the form is displayed within an acceptable response time (no long blank screen, no browser freeze), and operating it stays responsive — same UX class as the AngularJS version.","1. -
+2. DBに約30,000件の商品が存在していても、フォームが許容できる応答時間内に表示され（画面が長時間空白にならず、ブラウザがフリーズしないこと）、操作が固まらず応答すること ― AngularJS版と同等のUX水準。"
+47,応答時間,処理応答時間,"商品マスタ30,000件存在時の登録",正常,"1. On the [商品関連_商品マスタ (screen_id=429)] screen, without checking any row, click the 「商品追加・編集」 button to open the [商品関連_商品追加・編集 (screen_id=430)] screen in new-registration mode (empty form).
+2. The current owner already has about 30,000 products (商品) registered (a large-data state).","1. 「商品関連_商品マスタ（screen_id=429）」画面で行をチェックせずに「商品追加・編集」ボタンをクリックし、「商品関連_商品追加・編集（screen_id=430）」画面を新規登録モード（空フォーム）で開く。
+2. 現在の荷主に、約30,000件の商品が登録されている状態（大量データの状態）にする。","1. Fill all required fields with valid values.
+2. Click the 「登録」 button.
+3. Measure the response time until the success popup appears.","1. すべての必須項目に有効な値を入力する。
+2. 「登録」ボタンをクリックする。
+3. 成功ポップアップが表示されるまでの応答時間を計測する。","1. -
+2. The loading indicator is displayed immediately.
+3. Even with about 30,000 existing products (the 商品コード uniqueness check runs against them, then the default 荷姿「ばら」 is auto-created), the registration completes smoothly within an acceptable response time and the success popup (I001) is displayed without the browser freezing — same UX class as the AngularJS version.","1. -
+2. 読み込み中の表示がすぐに表示されること。
+3. 約30,000件の商品が存在していても（商品コードの重複チェックがそれらに対して実行され、続けて既定の荷姿「ばら」が自動作成される）、登録処理が許容できる応答時間内にスムーズに完了し、ブラウザがフリーズせずに成功ポップアップ（I001）が表示されること ― AngularJS版と同等のUX水準。"

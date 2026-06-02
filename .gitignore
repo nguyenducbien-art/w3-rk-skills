@@ -1,0 +1,6 @@
+.DS_Store
+**/__pycache__/
+**/*.pyc
+# deliverables are written to <cwd>/w3-rk-skills-output/, never inside this repo:
+output/
+**/output/

@@ -1,0 +1,5 @@
+{
+  "name": "w3-integration-test",
+  "description": "W3 Mimosa integration test-case specs: /generation (gen) + /review (review). Reads the AngularJS controller/view/BaseController + Laravel BE, produces a bilingual CSV → official Excel, and reviews an existing spec.",
+  "author": { "name": "BienND" }
+}

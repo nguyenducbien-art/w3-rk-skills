@@ -1,0 +1,214 @@
+﻿№,大分類,中分類,小分類,正常/異常,PRE-CONDITION,前提条件,STEPS,実施内容,EXPECTED RESULT,確認事項
+1. 共通確認,,,,,,,,,,
+1,ページタイトル,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,1. Verify the page title of the screen.,1. 画面のページタイトルを確認する。,"1. The page title is 'W3 mimosa | 入荷実績照会（実績）"".",1. ページタイトルが「W3 mimosa | 入荷実績照会（実績）」であること。
+2,ヘッダー,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,1. Verify the displays of the header.,1. ヘッダーの表示を確認する。,1. The displayed items in the header are the same as those in the AngularJS system.,1. ヘッダーの表示項目がAngularJS版と一致すること。
+3,フッター,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,1. Verify the displays of the footer.,1. フッターの表示を確認する。,1. The displayed items in the footer are the same as those in the AngularJS system.,1. フッターの表示項目がAngularJS版と一致すること。
+4,メニュー,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Verify the displays of the menu.
+2. Click on each menu item","1. メニューの表示を確認する。
+2. 各メニュー項目をクリックする。","1. The displayed items for each menu item are the same as those in the AngularJS system.
+2. Each menu item link navigates to the correct destination.","1. 各メニュー項目の表示内容がAngularJS版と一致すること。
+2. 各メニュー項目が正しい遷移先に遷移すること。"
+2. 表示確認,,,,,,,,,,
+5,画面表示,,,正常,"1. 'unit_screens` SET `is_display` = '0', available = 1にする.",1. 'unit_screens' の `is_display` を '0' に、`available` を 1 にする。,1. Compare the items between the AngularJS screen and the React screen.,1. AngularJS画面とReact画面の項目を比較する。,1. The 入荷実績（実績）screen with `is_display` = 0 and `available` = 1 is not displayed in both the Unit screen and the Header menu.,1. is_display = 0、available = 1 の「入荷実績（実績）」画面が、ユニット画面およびヘッダーメニューの両方に表示されないこと
+6,グリッド列表示,,,正常,"1. 'unit_grid_columns` SET `is_display` = '0, available = 1にする.",1. unit_grid_columns の is_display を '0'、available を '1' に更新する。,1. Compare the items between the AngularJS screen and the React screen.,1. AngularJS画面とReact画面の項目を比較する。,1. The grid column with 'is_display' = '0' and 'available' = '1' is not displayed.,1.「is_display」が「0」で「available」が「1」のグリッド列は表示されません。
+7,ボタン表示,,,正常,1. 'unit_button_apis` SET `is_display` = '0'.,1. 'unit_button_apis` の `is_display` を '0' に設定,1. Compare the items between the AngularJS screen and the React screen.,1. AngularJS画面とReact画面の項目を比較する。,1. The specific button of 入荷実績（実績）screen with is_'display' = '0' is not displayed.,1. is_display = 0 の「入荷実績（実績）」画面の特定ボタンが表示されないこと。
+8,表示,グリッド,データなし,異常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Ensure there is no record that have status = 入荷済 / 格納済 in the 進捗ステータス column.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. 「進捗ステータス」列に「入荷済」または「格納済」のレコードが存在しないことを確認する。",1. Observe the 入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）」（screen_id=589）画面を確認する。,1. The grid shows no rows but retains column headers without console errors.,1. データ行0件でも列ヘッダが残りコンソールエラーが出ないこと。
+3. バリデーション確認,,,,,,,,,,
+9,入荷実績出力(B&D),選択なし,,異常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Grid data is loaded.
+3. The CSV template file has not been configured.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. グリッドデータが読み込まれている。
+3. CSVテンプレートファイルが未設定であること。。",1. Click the 入荷実績出力(B&D) button.,1. 「入荷実績出力(B&D)」ボタンをクリックする。,1. An error modal (E030) opens with title '利用可能CSV無し' and message '現在利用可能なテンプレートがありません。CSV設定をご確認ください ',1. エラーモーダル（E030）が開き、タイトルが「利用可能CSV無し」、メッセージが「現在利用可能なテンプレートがありません。CSV設定をご確認ください」であること。
+10,境界値 ― 上限未満（499行）,,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Ensure exactly 499 rows are available and selectable.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. 499件のデータが存在し、選択可能であることを確認する。","1. Check all 499 rows. 
+2. Click the 明細 button.","1. 499件のデータをすべて選択する。
+2.［明細］ボタンをクリックする。","1. All 499 rows are checked. 
+2. The screen navigates to 入荷実績（明細）screen.
+3. No E028 error is shown.","1. 499件のすべての行にチェックが入っていること。
+2. 画面が「入荷実績（明細）」へ遷移すること。
+3. E028エラーが表示されないこと。"
+11,境界値 ― 上限ちょうど（500行）,,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Ensure exactly 500 rows are available and selectable.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. 500件のデータが存在し、選択可能であることを確認する。","1. Check all 500 rows. 
+2. Click the 明細 button.","1. 500件のデータをすべて選択する。
+2.［明細］ボタンをクリックする","1. All 500 rows are checked. 
+2. The screen navigates to 入荷実績（明細）screen. 
+3. No E028 error is shown.","1. 500件のすべての行にチェックが入っていること。
+2. 画面が「入荷実績（明細）」へ遷移すること。
+3. E028エラーが表示されないこと。"
+12,上限値超過（501件）における境界値テスト,,,異常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Ensure 501 rows are available and selectable.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. 501件のデータが存在し、選択可能であることを確認する。","1. Check all 501 rows. 
+2. Click the 明細 button.","1. 501件のデータをすべて選択する。
+2.［明細］ボタンをクリックする。","1. All 501 rows are checked. 
+2. An error modal (E028) is shown.
+3. Navigation does NOT occur.","1. 501件のデータがすべて選択されていること。
+2. エラーモーダル（E028）が表示されること。
+3. 画面遷移が行われないこと"
+4. 業務処理の確認,,,,,,,,,,
+4.1 業務処理の確認,,,,,,,,,,
+13,初期表示,,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Data exists for all the columns","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. すべての列にデータが存在する",1. Verify the initial display of the screen.,1. 画面の最初の表示を確認する。,1. The corresponding data is retrieved and correctly mapped to the appropriate fields.,1. 該当データが取得され、正しい項目に正しく反映されること。
+14,入荷実績出力(B&D),「実行」ボタンをクリックする,単一選択,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Don't select any record.
+3. The CSV template file has been configured.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. いずれのレコードも選択しない。
+3. CSVテンプレートファイルが設定済みであること。","1. Click the 入荷実績出力(B&D) button.
+2. Select any option.
+3. Click the 実行 button.","1. 「入荷実績出力(B&D)」ボタンをクリックする。
+2. 任意のオプションを選択する。
+3. 「実行」ボタンをクリックする。","1. A modal is displayed.
+2. -
+3.1. The modal is closed.
+3.2. The file is exported successfully with correct format.","1. モーダルが表示されること。
+2. －
+3.1. モーダルが閉じられること。
+3.2. ファイルが正しい形式で正常に出力されること。"
+15,入荷実績出力(B&D),「実行」ボタンをクリックする,単一選択,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Select only 1 record.
+3. The CSV template file has been configured.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. レコードを1件のみ選択する。
+3. CSVテンプレートファイルが設定済みであること。","1. Click the 入荷実績出力(B&D) button.
+2. Select any option.
+3. Click the 実行 button.","1. 「入荷実績出力(B&D)」ボタンをクリックする。
+2. 任意のオプションを選択する。
+3. 「実行」ボタンをクリックする。","1. A modal is displayed.
+2. -
+3.1. The modal is closed.
+3.2. The file is exported successfully with correct format.","1. モーダルが表示されること。
+2. －
+3.1. モーダルが閉じられること。
+3.2. ファイルが正しい形式で正常に出力されること。"
+16,入荷実績出力(B&D),「実行」ボタンをクリックする,複数選択,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Select multiple records.
+3. The CSV template file has been configured.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. レコードを1件以上選択する。
+3. CSVテンプレートファイルが設定済みであること。","1. Click the 入荷実績出力(B&D) button.
+2. Select any option.
+3. Click the 実行 button.","1. 「入荷実績出力(B&D)」ボタンをクリックする。
+2. 任意のオプションを選択する。
+3. 「実行」ボタンをクリックする。","1. A modal is displayed.
+2. -
+3.1. The modal is closed.
+3.2. The file is exported successfully with correct format.","1. モーダルが表示されること。
+2. －
+3.1. モーダルが閉じられること。
+3.2. ファイルが正しい形式で正常に出力されること。"
+17,入荷実績出力(B&D), 「キャンセル」ボタンをクリックする,単一選択,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Select only 1 record.
+3. The CSV template file has been configured.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. レコードを1件のみ選択する。
+3. CSVテンプレートファイルが設定済みであること。","1. Click the 入荷実績出力(B&D) button.
+2. Select any option.
+3. Click the キャンセル button.","1. 「入荷実績出力(B&D)」ボタンをクリックする。
+2. 任意のオプションを選択する。
+3. 「キャンセル」ボタンをクリックする。","1. A modal is displayed.
+2. -
+3. The modal is closed.","1. モーダルが表示されること。
+2. －
+3. モーダルが閉じられること。"
+18,入荷実績出力(B&D), 「キャンセル」ボタンをクリックする,複数選択,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Select multiple records.
+3. The CSV template file has been configured.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. レコードを1件以上選択する。
+3. CSVテンプレートファイルが設定済みであること。","1. Click the 入荷実績出力(B&D) button.
+2. Select any option
+3. Click the キャンセル button","1. 「入荷実績出力(B&D)」ボタンをクリックする。
+2. 任意のオプションを選択する。
+3. 「キャンセル」ボタンをクリックする。","1. A modal is displayed.
+2. -
+3. The modal is closed.","1. モーダルが表示されること。
+2. －
+3. モーダルが閉じられること。"
+19,マイフィルタ,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,1. Observe the マイフィルタ toolbar area.,1. マイフィルタのツールバーエリアを確認する。,"1. The マイフィルタ dropdown shows only 'フィルタなし'; no saved labels are listed.
+2. No filter is applied to the grid on load.","1. マイフィルタドロップダウンに「フィルタなし」のみが表示され、保存済みラベルが表示されないこと。 
+2. グリッドに初期フィルターが適用されていないこと。"
+20,マイフィルタ,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Apply a column filter to the grid.
+2. Modify the column filter (change the condition).
+3. Click the × icon next to a saved label. ","1. グリッドに列フィルターを適用する。
+2. 列フィルターを変更する（条件を変更する）。
+3. 保存済みラベル横の「×」アイコンをクリックする。","1. The new label appears in the マイフィルタ dropdown.
+2. Column filter is modified.
+3. The filter is cleared.","1. 新しいラベルがマイフィルタのドロップダウンに表示されること。
+2. 列フィルターが変更されること。
+3. フィルターがクリアされること。"
+21,"並べ替え - フィルターあり
+",,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Click the Sort button of any column.
+* Please try both ascending and descending sort.","1. 任意の列のソートボタンをクリックする。
+※ 昇順・降順の両方を実施する。",1. The sorting results are displayed correctly for both ascending and descending order.,1. 昇順・降順いずれの場合も、ソート結果が正しく表示されること。
+22,"フィルター + 並べ替え
+",,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen. screen.
+2. Data exists.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. データは存在します。」","1. Apply filter.
+2. Apply sort.","1. フィルターを適用する。
+2. 並べ替えを適用する。","1. Filter works correctly.
+2. Sorted result is correct.","1. フィルターが正しく動作すること。 
+2. 並べ替え結果が正しいこと。"
+23,一覧に移動,,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Ensure grid data is loaded.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. グリッドデータが読み込まれている状態にする。",1. Click directly on External Link Icon of any grid row.,1. グリッドの任意の行にある外部リンクアイコンを直接クリックする。,1. The screen navigates to 入荷実績（一覧）(screen_id =26).,1. 「入荷実績（一覧）」（screen_id=26）画面に遷移すること。
+24,明細,,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Grid data is loaded.
+3. No rows are checked.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. グリッドデータが読み込まれている。
+3. チェックされている行がない状態にする。",1. Click the 明細 button.,1. 「明細」ボタンをクリックする。,"1.1. The screen navigates to 入荷実績（明細）(screen_id =32).
+1.2. All of the records are displayed correctly.","1.1. 「入荷実績（明細）」（screen_id=32）画面に遷移すること。
+1.2. 選択した全レコードが正しく表示されること。"
+25,明細,,,正常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Select at least 1 record.","1. 「入荷実績（実績）(screen_id=589)」を開く。
+2. 1件以上のレコードを選択する。",1. Click the 明細 button.,1. 「明細」ボタンをクリックする。,"1.1. The screen navigates to 入荷実績（明細）(screen_id =32).
+1.2. The selected record is displayed correctly.","1.1. 「入荷実績（明細）」（screen_id=32）画面に遷移すること。
+1.2. 選択したレコードが正しく表示されること。"
+26,CSVエクスポート,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Select a record in the grid view.
+2. Click the CSV button.","1. グリッドビューでレコードを選択する。
+2. CSVボタンをクリックする。","1. -
+2. CSV File is exported successfully and correct format","1. -
+2. CSVファイルが正常に出力され、形式が正しいこと。"
+27,帳票,,,正常,"1. The user is logged in. 
+2. Both the ReactJS system and the AngularJS system are opened on the list screen.
+3. The report settings have been configured. Please refer to the instructions below to access the settings screen.
+(ユニット設定＞帳票設定＞帳票情報設定)
+4. Open the [入荷実績（実績）(screen_id=589)] screen.","1. ユーザーがログイン済みであること。 
+2. ReactJS版およびAngularJS版で一覧画面が表示されていること。
+3. 帳票設定は設定済みです。設定画面へのアクセス方法は以下をご参照ください。
+(ユニット設定＞帳票設定＞帳票情報設定)
+4. 「入荷実績（実績）(screen_id=589)」を開く。","1. Select a record in the grid view.
+2. Click the 帳票 button.","1. 画面でレコードを選択する。
+2. 帳票ボタンをクリックする。","1. -
+2. The report popup is displayed the same as in the AngularJS system.
+3. The report is exported successfully with correct format.","1. －
+2. 帳票ポップアップが AngularJS 版と同一に表示されること。
+3. 帳票が正しい形式で正常に出力（エクスポート）されること。"
+28,グリッドビューのサブ画面,,,正常,1. Open the [入荷実績（実績）(screen_id=589)] screen. screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Click on the Expand button of any record.
+2. Click on each tab of the selected record above
+","1. 任意のレコードの展開（Expand）ボタンをクリックする。
+2. 上記で選択したレコードの各タブをそれぞれクリックする。","1. All tabs in the sub-screen is displayed correctly.
+2. The data in each tabs of the sub-screen is displayed correctly.","1. サブ画面内のすべてのタブが正しく表示されること。
+2. サブ画面の各タブに表示されるデータが正しく表示されること。"
+29,設定アイコン,,,,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Click on the Setting icon.
+",1. 設定アイコンをクリックする。,1. The screen navigates to the 画面設定_項目表示設定 screen..,1. 画面設定（項目表示設定）画面に遷移すること。
+30,展開ボタン,,,,1. Open the [入荷実績（実績）(screen_id=589)] screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Click on the Expand icon.
+",1. 展開アイコンをクリックする。,1. The screen is opened to full screen.,1. 画面が全画面表示になること。
+4.2 その他処理の確認,,,,,,,,,,
+31,ネットワークエラー,,,異常,"1. Open the [入荷実績（実績）(screen_id=589)] screen.
+2. Select at least 1 record.",1. 「入荷実績（実績）(screen_id=589)」を開く。,"1. Tick the checkbox of any row in the grid view.
+2. Turn off network.
+3. Click the 入荷実績出力(B&D) button.","1. グリッド ビューの任意の行のチェックボックスをオンにします。
+2. ネットワークをオフにします。
+3. 「入荷実績出力(B&D)」ボタンをクリックする。","1. -
+2. -
+3. An error message is displayed.
+","1. -
+2. -
+3. エラーメッセージが表示されること。
+"
+5. 性能確認,,,,,,,,,,
+32,応答時間,画面応答時間,,正常,"1. Prepare 30,000 test records."," 1. 30,000件のテストデータを準備する。",1. Open the [入荷実績（実績）(screen_id=589)] screen. screen.,1. 「入荷実績（実績）(screen_id=589)」を開く。,"1.1. The initial load completes successfully with 30,000 data items.
+1.2. Pagination functions correctly with 30,000 data items.
+1.3. Browser memory usage (JS heap) remains stable.","1.1. 30,000件のデータ表示時に初期表示が正常に完了すること。
+1.2. 30,000件のデータ表示時にページネーションが正しく動作すること。
+1.3. ブラウザのメモリ使用量（JSヒープ）が異常に増加しないこと。"
