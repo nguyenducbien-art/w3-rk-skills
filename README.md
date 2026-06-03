@@ -22,6 +22,18 @@ This repo **is** the marketplace (`.claude-plugin/marketplace.json`) and hosts i
 Then enable **auto-update** so you always get the latest: `/plugin` → **Marketplaces** tab → toggle
 **Enable auto-update** for `w3-rk-skills`. (Third-party marketplaces have auto-update OFF by default.)
 
+## Update to the latest version
+
+With auto-update enabled, a **new session** picks up the latest automatically. To pull an update
+right now (or if auto-update is off), run:
+
+```
+/plugin marketplace update w3-rk-skills
+```
+
+Then **restart / open a new Claude Code session** — a session already running keeps the version it
+loaded at start. Check the installed version anytime via `/plugin` → **Manage plugins**.
+
 ## Use
 
 Open Claude Code **in the W3 code repo** (the working directory must be the repo that holds

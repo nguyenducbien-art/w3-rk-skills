@@ -202,14 +202,16 @@ def main():
             ws.cell(lr, c).border = Border(left=o.left, right=o.right, top=o.top, bottom=thin,
                                            diagonal=o.diagonal, outline=o.outline)
 
-    # Bold (medium) framing requested by QA:
+    # Bold (medium) framing requested by QA — applied to the HEADER band only (rows 16-17); every
+    # data row below keeps the template's normal (thin) edges:
     #  (1) the gray column-header band (A16:K17) gets a bold top + bottom edge, and
-    #  (2) the blue result region's right edge (column AW = LAST_COL) is bold all the way down.
+    #  (2) the blue result-header band's right edge (column AW = LAST_COL) is bold — header rows only,
+    #      NOT carried down the sheet.
     medium = Side(style="medium", color="000000")
     for c in range(1, N_DATA_COLS + 1):                       # gray header A..K
         set_side(ws.cell(HEADER_TOP_ROW, c), top=medium)      # bold top   (row 16)
         set_side(ws.cell(HEADER_BOT_ROW, c), bottom=medium)   # bold bottom(row 17, merge end)
-    for rr in range(HEADER_TOP_ROW, last + 1):                # result block right edge, header→last TC
+    for rr in (HEADER_TOP_ROW, HEADER_BOT_ROW):               # blue result-header right edge, rows 16-17 only
         set_right_edge(ws, rr, LAST_COL, medium)
 
     # 2.履歴 — author + dates. (Date display is normalized to DD/MM/YYYY by the sweep below — the
