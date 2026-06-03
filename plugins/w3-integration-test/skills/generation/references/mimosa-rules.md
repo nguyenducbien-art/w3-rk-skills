@@ -128,7 +128,12 @@ record), the **success TC** of the register/update/delete action gets an extra *
 verify step** in S4.1 — a UI success modal alone doesn't prove the write landed. (List / Detail /
 display screens keep the no-DB rule: functional equivalence vs AngularJS, no DB-column check.)
 
-- **Create (登録/保存 → I001):** add a final step `Run SQL: SELECT … FROM <entity> WHERE <natural key>`
+🔴 **Prefix the verify step.** A STEP that runs a check SELECT *after* submit is tagged so it reads
+as a DB check, not a user action: EN `N. [verify DB] Run SQL: SELECT …`; JP
+`N. [DB確認] SQLを実行: SELECT …`. (Setup SQL in PRE-CONDITION keeps the plain `Run SQL:` /
+`SQLを実行:` — the `[verify DB]` / `[DB確認]` tag is ONLY for the post-submit verification step in STEPS.)
+
+- **Create (登録/保存 → I001):** add a final step `[verify DB] Run SQL: SELECT … FROM <entity> WHERE <natural key>`
   → EXPECTED: a new row exists with the entered values (name the key fields).
 - **Edit (更新 → I001):** → EXPECTED: the row is updated to the new values **and** fields not edited
   are preserved (verify both).
@@ -137,7 +142,8 @@ display screens keep the no-DB rule: functional equivalence vs AngularJS, no DB-
 SELECT by the business **natural key** (e.g. `商品コード`), never a hard-coded local id; this is a
 read-only verify (no restore needed). The DB step is **added**, not a replacement — keep the UI
 EXPECTED too (success modal / grid reload / navigation). `build_csv.py`'s `verify()` warns when
-`SCREEN_TYPE` is form/edit/create but no S4.1 TC carries a `Run SQL: SELECT` step.
+`SCREEN_TYPE` is form/edit/create but no S4.1 TC carries a verify `Run SQL: SELECT` step, and when a
+STEP runs a verify SELECT without the `[verify DB]` / `[DB確認]` prefix.
 
 Also add a concurrency-conflict TC → §concurrent-conflict.
 

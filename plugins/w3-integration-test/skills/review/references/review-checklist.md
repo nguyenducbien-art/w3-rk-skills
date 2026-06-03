@@ -51,8 +51,10 @@
 ## 4b. Form/edit/create extras  (→ `mimosa-rules.md` §verify-db, §concurrent-conflict)
 Only for form/edit/create screens (screen_type Edit-Form):
 - **DB-persistence verify** — the register/update/delete **success** TC has a step verifying the
-  record was created/updated/deleted in the DB (`Run SQL: SELECT … WHERE <natural key>`). Flag
-  **[Add]** if the success TC has no DB-verify step. (Display/list screens must NOT — see §7.)
+  record was created/updated/deleted in the DB (`[verify DB] Run SQL: SELECT … WHERE <natural key>`).
+  Flag **[Add]** if the success TC has no DB-verify step. Flag **[Modify]** if the verify-SELECT step
+  is missing the `[verify DB]` / `[DB確認]` prefix (§verify-db — it tags the step as a DB check, not a
+  user action). (Display/list screens must NOT — see §7.)
 - **Concurrent-conflict (2-tab / 2-browser)** — a TC interleaving two sessions ("1st tab / 2nd tab"
   = `1つ目/2つ目のタブ`, or two browsers) that edit the same record / register the same key at once
   (canonical shape in §concurrent-conflict). Flag **[Add]** if missing — don't mistake the tab-based

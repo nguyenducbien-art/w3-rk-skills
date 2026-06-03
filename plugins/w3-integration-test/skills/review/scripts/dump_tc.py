@@ -49,6 +49,15 @@ def _pre_mode_tail(pre):   # §precondition: landing line narrates mode/state (k
     return any(k in (pre or '') for k in ('モードで', '空フォーム'))
 
 
+def _verify_sql_noprefix(cell):   # §verify-db: a post-submit verify SELECT in a STEP must be tagged [verify DB]/[DB確認]
+    for ln in (cell or '').split('\n'):
+        low = ln.lower()
+        is_sql = 'run sql' in low or 'sqlを実行' in low
+        if is_sql and 'select' in low and '[verify db]' not in low and '[db確認]' not in low:
+            return True
+    return False
+
+
 def _crammed_subnums(cell):   # output-rules §6: 2+ dotted sub-numbers run together on one line
     for ln in (cell or '').split('\n'):
         if len(re.findall(r'\d+\.\d+', ln)) >= 2:
@@ -144,6 +153,8 @@ def main():
             flags.append(f"№{tag} {cat1}: PRE line crams screen-ref + click — split into 1 action/step (§precondition)")
         if _pre_mode_tail(pe) or _pre_mode_tail(pj):
             flags.append(f"№{tag} {cat1}: PRE narrates landed-screen mode/state — keep landing terse ('… screen is displayed.'), drop 'in … mode / empty form / pre-filled' (§precondition)")
+        if _verify_sql_noprefix(se) or _verify_sql_noprefix(sj):
+            flags.append(f"№{tag} {cat1}: STEP runs a verify SELECT without the [verify DB] / [DB確認] prefix (§verify-db)")
         for label, cell in (('STEPS', se), ('実施内容', sj), ('EXPECTED', ee), ('確認事項', ej), ('PRE', pe), ('前提条件', pj)):
             if _crammed_subnums(cell):
                 flags.append(f"№{tag} {cat1}: {label} runs 2+ sub-numbers on one line (output-rules §6)")
