@@ -52,14 +52,17 @@ deliverables never get committed to the product repo.
 
 ## Maintain (publish an update)
 
-Edit a skill under `plugins/w3-integration-test/skills/{generation,review}/`, then:
+Edit a skill under `plugins/w3-integration-test/skills/{generation,review}/`, then **bump the
+`version`** in `plugins/w3-integration-test/.claude-plugin/plugin.json` (semver) and push:
 
 ```
+# bump version: 1.0.0 → 1.0.1 (patch) / 1.1.0 (feature) / 2.0.0 (breaking)
 git add -A && git commit -m "…" && git push
 ```
 
-`plugin.json` intentionally has **no `version`** → Claude Code uses the git commit SHA, so every push
-is a new version and teammates with auto-update get it on their next session.
+🔴 **Auto-update fires only when `version` changes.** With an explicit `version`, a push that does
+NOT bump it will NOT reach teammates — always bump the version on a release. Teammates with
+auto-update enabled then get it on their next session.
 
 ## Layout
 
