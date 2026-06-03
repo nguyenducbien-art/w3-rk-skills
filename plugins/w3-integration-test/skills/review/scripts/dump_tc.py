@@ -41,6 +41,14 @@ def _pre_crammed(pre):   # §precondition: a PRE line with a (screen_id=…) ref
     return False
 
 
+def _pre_mode_tail(pre):   # §precondition: landing line narrates mode/state (keep it terse "… is displayed.")
+    low = (pre or '').lower()
+    if any(k in low for k in ('opens in ', 'in edit mode', 'in new-registration mode',
+                              'in new registration mode', 'empty form', 'pre-filled', 'prefilled')):
+        return True
+    return any(k in (pre or '') for k in ('モードで', '空フォーム'))
+
+
 def _crammed_subnums(cell):   # output-rules §6: 2+ dotted sub-numbers run together on one line
     for ln in (cell or '').split('\n'):
         if len(re.findall(r'\d+\.\d+', ln)) >= 2:
@@ -134,6 +142,8 @@ def main():
             flags.append(f"№{tag} {cat1}: 正常 case in バリデーション(S3) — should move to S4.1 (§s3-abnormal-only)")
         if _pre_crammed(pe) or _pre_crammed(pj):
             flags.append(f"№{tag} {cat1}: PRE line crams screen-ref + click — split into 1 action/step (§precondition)")
+        if _pre_mode_tail(pe) or _pre_mode_tail(pj):
+            flags.append(f"№{tag} {cat1}: PRE narrates landed-screen mode/state — keep landing terse ('… screen is displayed.'), drop 'in … mode / empty form / pre-filled' (§precondition)")
         for label, cell in (('STEPS', se), ('実施内容', sj), ('EXPECTED', ee), ('確認事項', ej), ('PRE', pe), ('前提条件', pj)):
             if _crammed_subnums(cell):
                 flags.append(f"№{tag} {cat1}: {label} runs 2+ sub-numbers on one line (output-rules §6)")
@@ -148,6 +158,19 @@ def main():
         for tok in FORBIDDEN:
             if tok in ee or tok in ej:
                 flags.append(f"№{tag} {cat1}: forbidden token '{tok}' in EXPECTED")
+
+    # §nav-button-modal (1b): the screen name (1.概要 N36) should match the user-facing page title.
+    pt = None
+    for vals in rows:
+        if vals[1].strip() == 'ページタイトル':
+            m = re.search(r'W3 mimosa\s*\|\s*(.+?)\s*["」]', (vals[9] or '') + ' ' + (vals[10] or ''))
+            if m:
+                pt = m.group(1).strip()
+            break
+    if pt and name and str(name).strip() != pt \
+            and (str(name).strip() in pt or pt in str(name).strip()):
+        flags.append(f"screen name (1.概要 N36='{name}') vs page title ('{pt}') look like short/long forms "
+                     f"— unify to the fuller user-facing name in N36 / file / refs (§nav-button-modal)")
 
     print(f"screen_id (1.概要 N32): {sid}")
     print(f"screen_name (1.概要 N36): {name}")

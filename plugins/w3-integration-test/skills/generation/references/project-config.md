@@ -72,6 +72,11 @@ deliverables into the product repo. If the user wants another location, honor it
 - `<top_scr_nm>` = `screens.top_scr_nm`; if the target is a sub-screen with empty `top_scr_nm`,
   use the **parent** screen's (e.g. 172 empty → parent 158 = `検品作業実績`).
 - `<sub_scr_nm>` = `screens.sub_scr_nm`. Initial version `ver1.0`. Excel only when the user explicitly asks (not auto).
+- 🔴 **Screen display name** (1.概要 N36 + the file name + every `[<name> (screen_id=X)]` reference):
+  prefer the screen's **user-facing name** — the App-routing page title (after `W3 mimosa | `) / the
+  open-button label — when it is fuller than DB `alias_nm` (e.g. `出荷指示登録・修正`, not the shorter
+  `出荷指示登録`). Keep it consistent with the page-title TC and all references; don't name the same
+  screen two ways (`writing-rules.md` §nav-button-modal).
 
 ## 3. Local DB (Docker — runs on CODE_REPO) — OPTIONAL, FILL per machine (or skip → §3.3)
 

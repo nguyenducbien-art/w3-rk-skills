@@ -19,6 +19,11 @@
 ## 2. Button coverage  (→ `gates-workflow.md` §assume-all-enabled + `per-button-patterns.md`)
 - Every **real** button (from controller + BaseController + stg, assume-all-enabled) has TC(s).
   Flag any missing button. Flag any **invented** button (not on the screen / no real `func`).
+- **「ご利用ガイド」 header button** (→ `mimosa-rules.md` §guide-button): if the screen has a
+  `how_to_url` (button shown — check `SELECT how_to_url FROM screens WHERE id=X` / stg), expect ONE
+  TC in S4.1: click 「ご利用ガイド」 → the screen's guide opens in a new browser tab. Flag **[Add]** if
+  missing. If `how_to_url` is empty the button isn't rendered → there must be NO such TC (flag
+  **[Delete]** if invented).
 
 ## 3. 🌟 Branch coverage — the #1 check  (→ `gates-workflow.md` Gate C)
 - Build the screen's branch list (step 2). **Every branch must map to ≥1 TC** — list each DROPPED
@@ -81,8 +86,18 @@ Only for form/edit/create screens (screen_type Edit-Form):
 
 ## 7. Wording  (→ `writing-rules.md`, `output-rules.md`)
 - Every screen reference in PRE + EXPECTED carries `(screen_id=N)`.
-- **PRE-CONDITION = one action per numbered line** (§precondition): flag a PRE line that crams
-  open-screen + (don't-)select-rows + click into one line → [Modify] split it (EN/JP mirror).
+- **Screen display name consistent + user-facing** (§nav-button-modal): the same screen is named the
+  same way in sheet 1 (1.概要 N36), the file name, and every `[<name> (screen_id=X)]` reference — and
+  it uses the page-title / open-button name. Flag **[Modify]** if a short `alias_nm` name disagrees
+  with the fuller page title (e.g. refs say `出荷指示登録` but the ページタイトル TC says
+  `W3 mimosa | 出荷指示登録・修正`) → unify to the fuller user-facing name.
+- **PRE-CONDITION = one action per numbered line + a terse landing** (§precondition): flag a PRE line
+  that crams open-screen + (don't-)select-rows + click into one line → **[Modify]** split it (EN/JP
+  mirror). The navigation may end with one terse landing line `The [<target> (screen_id=Y)] screen is
+  displayed.` — but flag **[Modify]** any landing that narrates the **mode/state** (`opens in
+  new-registration / edit mode`, `(empty form)`, `(the form is pre-filled …)`, `the selected record
+  is loaded`): drop that tail (the mode is set by the select / don't-select step; the loaded data is
+  what STEPS/EXPECTED verify).
 - **Each numbered / sub-numbered item on its own physical line** (output-rules §6): flag a run-on
   `1.1 … 1.2 … 1.3 …` cell → [Modify].
 - **Multi-field lists comma-separated, every field spelled out** (§enumerate): flag `・`/`&`/`;`-jammed

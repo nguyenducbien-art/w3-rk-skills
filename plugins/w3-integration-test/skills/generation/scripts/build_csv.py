@@ -14,12 +14,13 @@ from pathlib import Path
 
 # ============================ SCREEN CONFIG — FILL ============================
 SCREEN_ID   = "<X>"
-SCREEN_ALIAS = "<screen_alias>"        # screens.alias_nm
+SCREEN_ALIAS = "<screen_alias>"        # the screen's USER-FACING name (App-routing page title / open-button label); use the FULLER form when DB alias_nm is shorter (e.g. 出荷指示登録・修正 not 出荷指示登録) — keep consistent with PAGE_TITLE + all [name (screen_id=X)] refs (§nav-button-modal)
 PAGE_TITLE  = "<PAGE_TITLE>"            # part after "W3 mimosa | " in the App routing file
 SLUG        = "<slug>"                  # kebab-case from the AngularJS URL
 SCREEN_TYPE = "list"                    # "list" | "detail" | "form" — form/edit/create → §verify-db (DB-persistence verify in S4.1)
 ID_FROM_PARENT = False                  # True if a form/edit screen loads a record by an id from a parent → §direct-url-access (3 deep-link TCs: IDなし / 有効なID / 存在しないID)
 HAS_COLLAPSIBLE_SECTIONS = False        # True if a form has collapsible sections (全て開く / 全て閉じる / per-section ≫) → §form-accordion (toggle TCs in S4.1)
+HAS_HOWTO_GUIDE = False                  # True if screens.how_to_url is set → header shows 「ご利用ガイド」 → §guide-button (1 TC in S4.1: click → guide opens in new tab)
 OUT_DIR     = Path(__file__).resolve().parent   # the output/<slug>(screen_id=X)/ folder this script sits in
 # =============================================================================
 
@@ -88,6 +89,16 @@ def _pre_crammed(pre):  # writing-rules §precondition / output-rules §3: 1 act
             return True
     return False
 
+def _pre_mode_tail(pre):  # writing-rules §precondition: landing step = "<screen> is displayed." only — no mode/state
+    """A PRE line narrating the LANDED screen's mode/state (opens in new-reg/edit mode, empty form,
+    pre-filled, the selected record is loaded) restates what STEPS/EXPECTED verify — keep the landing
+    terse: `The [<target> (screen_id=Y)] screen is displayed.`"""
+    low = (pre or '').lower()
+    if any(k in low for k in ('opens in ', 'in edit mode', 'in new-registration mode',
+                              'in new registration mode', 'empty form', 'pre-filled', 'prefilled')):
+        return True
+    return any(k in (pre or '') for k in ('モードで', '空フォーム'))
+
 def _crammed_subnums(cell):  # output-rules §6: each numbered/sub-numbered item on its OWN line
     """A physical line carrying 2+ dotted sub-numbers (e.g. '1.1 … 1.2 … 1.3 …') means sub-items
     were run together on one line instead of one-per-line (\\n-separated)."""
@@ -113,6 +124,12 @@ def verify():
     """Self-check (output-rules §8). Prints WARN lines; does not auto-fix."""
     warn = []
     n = 0
+    # §nav-button-modal: the screen display name should be its user-facing name (page title / open-button),
+    # not a shorter DB alias. SCREEN_ALIAS and PAGE_TITLE being short/long forms of each other → unify.
+    if SCREEN_ALIAS and PAGE_TITLE and SCREEN_ALIAS != PAGE_TITLE \
+            and (SCREEN_ALIAS in PAGE_TITLE or PAGE_TITLE in SCREEN_ALIAS):
+        warn.append(f"SCREEN_ALIAS '{SCREEN_ALIAS}' vs PAGE_TITLE '{PAGE_TITLE}' look like short/long forms of "
+                    f"the same name — use the fuller user-facing name in refs + file name (§nav-button-modal)")
     for _marker, items in SECTIONS:
         for t in items:
             n += 1
@@ -125,6 +142,9 @@ def verify():
                 warn.append(f"TC{n} {cat1}: PRE missing (screen_id={SCREEN_ID})")
             if _pre_crammed(pe) or _pre_crammed(pj):
                 warn.append(f"TC{n} {cat1}: PRE line crams screen-ref + click — split into 1 action/step")
+            if _pre_mode_tail(pe) or _pre_mode_tail(pj):
+                warn.append(f"TC{n} {cat1}: PRE narrates landed-screen mode/state — keep the landing terse "
+                            f"('… screen is displayed.'), drop 'in … mode / empty form / pre-filled' (§precondition)")
             for label, cell in (('STEPS',se),('実施内容',sj),('EXPECTED',ee),('確認事項',ej),('PRE',pe),('前提条件',pj)):
                 if _crammed_subnums(cell):
                     warn.append(f"TC{n} {cat1}: {label} runs 2+ sub-numbers on one line — put each N.N on its own line")
@@ -156,6 +176,11 @@ def verify():
         scan = ' '.join((t[i] or '') for sec in (S2, S41) for t in sec for i in (1, 2, 6, 7, 8, 9))
         if not any(k in scan for k in ('全て開く', '全て閉じる', 'アコーディオン', '開閉', 'collapse')):
             warn.append("HAS_COLLAPSIBLE_SECTIONS: no section collapse/expand TC (全て開く / 全て閉じる / ≫) in S2/S41 (§form-accordion)")
+    # §guide-button: a screen with a how_to_url shows 「ご利用ガイド」 → needs its open-in-new-tab TC
+    if HAS_HOWTO_GUIDE:
+        scan = ' '.join((t[i] or '') for sec in (S1, S2, S41) for t in sec for i in (1, 2, 6, 7, 8, 9))
+        if 'ご利用ガイド' not in scan:
+            warn.append("HAS_HOWTO_GUIDE: no 「ご利用ガイド」 TC (click → guide opens in a new tab) in S4.1 (§guide-button)")
     print("verify:", "OK" if not warn else f"{len(warn)} warning(s)")
     for w in warn: print("  WARN", w)
     return n

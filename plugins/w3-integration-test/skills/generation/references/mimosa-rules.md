@@ -305,6 +305,23 @@ Read the view for the section list + toggle markup (the ng-click toggling a coll
 collapsible sections. `build_csv.py`'s `verify()` warns when `HAS_COLLAPSIBLE_SECTIONS=True` but no
 toggle TC is present.
 
+## §guide-button — 「ご利用ガイド」 header button (only when `screens.how_to_url` is set)
+
+The app header renders a 「ご利用ガイド」 button **only when `screens.how_to_url` is non-empty**
+(`ViewHelpers.php`: `if (!empty($currentUnitScreen->screen->how_to_url))` → a button
+`ng-click="openHowto('<how_to_url>')"`; `BaseController.openHowto(url)` = `window.open(url,
+'_blank')`). So it is screen-specific and opens **that screen's** guide URL in a NEW browser tab.
+
+- **Button shown** (the screen has a `how_to_url` — confirm via `SELECT how_to_url FROM screens
+  WHERE id=<X>`, or it is visible on stg): add **one** TC (Kind 正常), 中分類 = `ご利用ガイド`, in
+  **S4.1** with the 共通アイコン group (§S4.1-order #9):
+  - STEPS `1. Click the 「ご利用ガイド」 button in the header.` (JP `1. ヘッダーの「ご利用ガイド」ボタンをクリックする。`)
+  - EXPECTED `1. A new browser tab opens showing this screen's user guide (its how_to_url).`
+    (JP `1. 新しいブラウザタブで本画面のご利用ガイド（how_to_url）が開くこと。`)
+- **`how_to_url` empty** → the button is NOT rendered → **no TC** (don't invent it).
+- Pure external navigation (new tab) — no DB write, no in-app modal. Set `HAS_HOWTO_GUIDE=True` in
+  `build_csv.py` when the button is present so `verify()` checks the TC exists.
+
 ## §S4.1-order — strict group order
 
 1. **初期表示** (short form — `writing-rules.md` §initial-display)
@@ -321,6 +338,8 @@ toggle TC is present.
    (→全画面表示になる). Mandatory for screens with a table/grid. Don't reorder.
    (**Form screens** (no grid): instead, place the **collapsible-section toggles** here —
    全て開く / 全て閉じる / per-section `≫` — see §form-accordion.)
+9. **「ご利用ガイド」** (only if `screens.how_to_url` is set — independent of grid/form): 1 TC, click →
+   the screen's guide opens in a new browser tab. See §guide-button. Skip if no `how_to_url`.
 
 ## §perf — S5 performance
 
