@@ -23,6 +23,21 @@ reviewed TC file or the application source. Communicate with the user in **their
 
 If either is missing, ask and stop.
 
+**Optional env block** — same as the generation skill: the user may paste env lines to pin the
+environment; honor what's given, fall back to discovery for the rest. Only `CODE_REPO` + `DB local`
+are relevant here (review reads the screen but produces a `.md`, so **no Excel author/date**):
+
+```
+/review "/path/to/…結合テスト仕様書_… (screen_id=633)_ver1.0.xlsx" 633
+Env this environment:
+CODE_REPO = /path/to/w3..._frontend_develop_base   # else = session cwd
+DB local: container=<mysql-1>, db=<db>, user=root, pass=<pass>   # confirms metadata (optional)
+```
+
+**No DB / no Docker** — invoke with just the file + screen id: the preflight finds no DB and the
+review runs in **source-only mode**, auditing 100% from code + docs
+(`../generation/references/project-config.md` §3.3). A DB *present but mis-credentialed* → ask (§3.2).
+
 ## Reference map
 
 This skill's own files:

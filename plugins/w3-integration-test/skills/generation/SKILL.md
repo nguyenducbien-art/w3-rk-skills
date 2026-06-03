@@ -21,6 +21,25 @@ lives in `references/`; this file is the conductor. Communicate with the user in
 
 `screen_id` (required). If missing, ask for it and stop — do not analyze or generate without it.
 
+**Optional env block** — the user may paste extra lines after the screen id to pin the environment
+so nothing has to be discovered or asked. Honor whatever is given; fall back to the normal
+discovery (preflight / cwd / re-derive) for anything omitted:
+
+```
+/generation 633
+Env this environment:
+CODE_REPO = /path/to/w3..._frontend_develop_base   # else = session cwd (§1)
+DB local: container=<mysql-1>, db=<db>, user=root, pass=<pass>   # fills §3 placeholders
+test_user_roll = 4 (login dialog, local)            # else re-derived (§7) / placeholder
+Excel author (2.履歴 作成者) = BienND               # build_xlsx --author (Excel step only)
+Excel gen date (作成日/変更日) = 2026-06-03          # build_xlsx --today (Excel step only)
+```
+
+**No DB / no Docker** — just invoke with the screen id and no DB block (optionally note it):
+the preflight finds no DB, announces **source-only mode**, and generates 100% from code + docs
+(`project-config.md` §3.3). `<test_user_roll>` stays a placeholder; the `available=0` TC is dropped
+if `is_top` is unknown. (A DB that is *present but mis-credentialed* → the skill asks, §3.2.)
+
 ## Reference map (read on demand — do not preload everything)
 
 | File | Read it when |
