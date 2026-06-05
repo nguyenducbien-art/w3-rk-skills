@@ -130,6 +130,26 @@ def _collapsed_range(cell):  # writing-rules §enumerate: spell out X1/X2/X3, do
     distinct fields into shorthand — list them individually (送状備考1, 送状備考2, 送状備考3)."""
     return re.search(r'[ぁ-んァ-ヶ一-龥ー]\d+[〜～]\d+', cell or '') is not None
 
+def _bundled_outcome(cell):  # writing-rules §expected: ≥2 outcomes crammed in one EXPECTED line → split
+    """The standard mutation-error result (modal + loading hides + no save + stays on form) jammed
+    into one sentence. Flag a line asserting a modal/popup AND a second outcome on the same line."""
+    for ln in (cell or '').split('\n'):
+        low = ln.lower()
+        primary = ('modal' in low) or ('popup' in low) or ('is displayed' in low)
+        secondary = sum(k in low for k in ('loading', 'no data is saved', 'nothing is saved',
+                                           'stays on the form', 'is hidden', 'is navigated', 'navigated to'))
+        if primary and secondary >= 1:
+            return True
+    return False
+
+
+def _vague_error_msg(cell):  # writing-rules §expected: a validation error EXPECTED must quote 「…」, not paraphrase
+    s = cell or ''
+    mentions = any(k in s.lower() for k in ('message', 'error', 'validation')) or 'エラー' in s
+    has_quote = '「' in s and '」' in s
+    return mentions and not has_quote
+
+
 def verify():
     """Self-check (output-rules §8). Prints WARN lines; does not auto-fix."""
     warn = []
@@ -146,8 +166,10 @@ def verify():
             cat1, cat2, cat3, kind, pe, pj, se, sj, ee, ej = t
             if cat3 and not cat2:
                 warn.append(f"TC{n} {cat1}: 中分類 blank while 小分類 filled")
-            if _marker.startswith('3.') and kind == '正常':
-                warn.append(f"TC{n} {cat1}: 正常 case in バリデーション(S3) — move to S4.1 (S3 holds 異常 only)")
+            if _marker.startswith('3.') and kind == '正常' \
+                    and not any(k in (cat2 + cat3) for k in ('境界値', '上限', '下限', 'boundary')):
+                warn.append(f"TC{n} {cat1}: non-boundary 正常 case in バリデーション(S3) — move to S4.1 "
+                            f"(S3 = 異常 + BVA boundary cluster; §s3-abnormal-only)")
             if f"screen_id={SCREEN_ID}" not in pe or f"screen_id={SCREEN_ID}" not in pj:
                 warn.append(f"TC{n} {cat1}: PRE missing (screen_id={SCREEN_ID})")
             if _pre_crammed(pe) or _pre_crammed(pj):
@@ -171,6 +193,10 @@ def verify():
             for tok in ('stopLoading','startLoading','$scope','$http','dataBound','.error()','createEModal','createIModal'):
                 if tok in ee or tok in ej:
                     warn.append(f"TC{n} {cat1}: forbidden token '{tok}' in EXPECTED")
+            if _bundled_outcome(ee) or _bundled_outcome(ej):
+                warn.append(f"TC{n} {cat1}: EXPECTED bundles ≥2 outcomes on one line — split one per sub-line (§expected)")
+            if _marker.startswith('3.') and kind == '異常' and _vague_error_msg(ee):
+                warn.append(f"TC{n} {cat1}: S3 error EXPECTED paraphrases the message — quote the verbatim 「…」 (§expected / §be-first)")
     # form/edit/create screens need extra S4.1 coverage: DB-persistence verify + concurrency conflict
     if SCREEN_TYPE.lower() in ('form', 'edit', 'create'):
         s41 = ' '.join((t[i] or '') for t in S41 for i in (6, 7, 8, 9))   # all S4.1 STEPS + EXPECTED

@@ -29,7 +29,7 @@
 |---|---|---|---|
 | **S1** | `1. 共通確認` | Page title / header / footer / menu | I21 |
 | **S2** | `2. 表示確認` | 画面表示 / グリッド列表示 / ボタン表示 / 初期表示データなし | I22 |
-| **S3** | `3. バリデーション確認` | **異常 (rejection) only** — row-selection guard (E001) / boundary FAIL (BVA N+1) / invalid field input. 正常 / boundary-PASS → S4.1 (`mimosa-rules.md` §s3-abnormal-only) | I25 |
+| **S3** | `3. バリデーション確認` | **異常 (rejection) + the BVA boundary cluster** — row-selection guard (E001) / the boundary triple N-1·N·N+1 kept together / invalid field input. Non-boundary 正常 → S4.1 (`mimosa-rules.md` §s3-abnormal-only) | I25 |
 | **S4** | `4. 業務処理の確認` | (parent header — holds NO test case directly) | I26 |
 | **S4.1** | `4.1 業務処理の確認` | Action buttons / navigate / Q-confirm / filter 4-TC / 初期表示 / CSV / 帳票 / sub-screen / 共通アイコン | I27 |
 | **S4.2** | `4.2 その他処理の確認` | Network error / silent failures | I28 |
@@ -104,14 +104,15 @@ The generic QA base classifies by Category 1-8. When generating for W3, map them
   - **Form / edit screen**: `画面表示` + **`項目表示`** (field display) — **NOT `グリッド列表示`** (no grid).
     If it loads a record by an **id from a parent screen**, also add 「直接URLアクセス」 variants
     (IDなし / 有効なID / 存在しないID — direct deep-link entry) → `mimosa-rules.md` §direct-url-access.
-- **S3 — 異常 (rejection) cases ONLY** (`mimosa-rules.md` §s3-abnormal-only); 正常 / boundary-PASS →
-  S4.1. Branches by screen type:
-  - **List/detail**: per guard in the controller → row-selection (E001) + boundary BVA **N+1 FAIL**
-    if a MAX applies (N-1/N PASS → S4.1) + CSV/帳票 guard errors (E017/E001, `mimosa-rules.md`
-    §csv-report). Verify from code, never by default (`per-button-patterns.md` 6-A + §BVA).
+- **S3 — 異常 (rejection) cases + the BVA boundary cluster** (`mimosa-rules.md` §s3-abnormal-only);
+  non-boundary 正常 → S4.1. Branches by screen type:
+  - **List/detail**: per guard in the controller → row-selection (E001) + the boundary BVA cluster
+    **N-1·N·N+1 kept together in S3** if a MAX applies (§BVA) + CSV/帳票 guard errors (E017/E001,
+    `mimosa-rules.md` §csv-report). Verify from code, never by default (`per-button-patterns.md` 6-A + §BVA).
   - **Form / edit**: per-field **異常** validation (required-empty + maxlength N+1 + numeric
-    out-of-range + wrong type + 全必須) → `mimosa-rules.md` §form-field-validation. Still ~10-18 TCs,
-    **not 3**; the matching 正常 (boundary-PASS / accepted) cases sit in S4.1.
+    out-of-range + wrong type + 全必須) **+ the field's boundary-PASS (上限ちょうど / 下限ちょうど) kept
+    with it** → `mimosa-rules.md` §form-field-validation. Still ~10-18 TCs, **not 3**; only
+    non-boundary accepted cases (valid submit / only-required) sit in S4.1.
 - **S4.1**: strict group order — `初期表示` → real mutation buttons → `マイフィルタ`/`並べ替え`
   (4-TC) → navigate/明細 → CSV → 帳票 → sub-screen (展開) → 共通アイコン (画面設定/全画面表示).
   Full order → `mimosa-rules.md` §S4.1-order. If the screen has a `検索エリア` with several search
@@ -119,7 +120,8 @@ The generic QA base classifies by Category 1-8. When generating for W3, map them
   combined TC. A list that caps displayed rows → add `表示件数超過 (E029)`. **On a form/edit/create
   screen, the register/update/delete success TC adds a DB-persistence verify step** (`mimosa-rules.md`
   §verify-db) **+ a 2-browser concurrent-conflict TC** (`mimosa-rules.md` §concurrent-conflict); also
-  lands here are the 正常 boundary/valid cases moved out of S3 (§s3-abnormal-only). A form with
+  lands here are the **non-boundary** 正常 cases (valid submit / only-required) — the BVA boundary
+  cluster stays in S3 (§s3-abnormal-only). A form with
   **collapsible sections** also gets section-toggle TCs (全て開く / 全て閉じる / per-section ≫ — §form-accordion).
 - **S4.2**: ≥1 network error (grid load failure / mutation failure).
 - **S5**: 1 perf TC (30k) by default; 500 ids[] only when opted in.
@@ -129,7 +131,7 @@ The generic QA base classifies by Category 1-8. When generating for W3, map them
 | Excluded | Why |
 |---|---|
 | Top-nav hamburger / grid icon (`fa-th`) | common component |
-| Modal `×` / overlay-click dismiss, `成功 ― 閉じる ×` | library default / DEV common |
+| Modal `×` icon / overlay-click dismiss, `成功 ― 閉じる ×` | library default / DEV common — **but** a labeled 「キャンセル」 on a 検索/選択 (master-select) modal → **1 representative TC** (`writing-rules.md` §nav-button-modal) |
 | Cat 8 権限 (screen-level access, button-level perm, session expiry, unauthenticated redirect) | DEV common test suite |
 | Session timeout (F5), 404 URL, unlogged-in redirect | generic auth/Laravel |
 | Tick row / select-all checkbox | Kendo grid default |

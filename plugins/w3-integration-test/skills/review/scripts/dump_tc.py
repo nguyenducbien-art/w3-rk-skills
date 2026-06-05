@@ -76,6 +76,23 @@ def _collapsed_range(cell):   # §enumerate: a label glued to a numeric range (�
     return re.search(r'[ぁ-んァ-ヶ一-龥ー]\d+[〜～]\d+', cell or '') is not None
 
 
+def _bundled_outcome(cell):   # §expected: ≥2 outcomes crammed in one EXPECTED line → split one per sub-line
+    for ln in (cell or '').split('\n'):
+        low = ln.lower()
+        primary = ('modal' in low) or ('popup' in low) or ('is displayed' in low)
+        secondary = sum(k in low for k in ('loading', 'no data is saved', 'nothing is saved',
+                                           'stays on the form', 'is hidden', 'is navigated', 'navigated to'))
+        if primary and secondary >= 1:
+            return True
+    return False
+
+
+def _vague_error_msg(cell):   # §expected: a validation error EXPECTED must quote 「…」, not paraphrase
+    s = cell or ''
+    mentions = any(k in s.lower() for k in ('message', 'error', 'validation')) or 'エラー' in s
+    return mentions and not ('「' in s and '」' in s)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--xlsx", required=True)
@@ -147,8 +164,10 @@ def main():
         tag = (num.strip() or str(n))
         if cat3.strip() and not cat2.strip():
             flags.append(f"№{tag} {cat1}: 中分類 blank while 小分類 filled")
-        if section.startswith("3.") and kind.strip() == "正常":
-            flags.append(f"№{tag} {cat1}: 正常 case in バリデーション(S3) — should move to S4.1 (§s3-abnormal-only)")
+        if section.startswith("3.") and kind.strip() == "正常" \
+                and not any(k in (cat2 + cat3) for k in ('境界値', '上限', '下限', 'boundary')):
+            flags.append(f"№{tag} {cat1}: non-boundary 正常 case in バリデーション(S3) — move to S4.1 "
+                         f"(S3 = 異常 + BVA boundary cluster; §s3-abnormal-only)")
         if _pre_crammed(pe) or _pre_crammed(pj):
             flags.append(f"№{tag} {cat1}: PRE line crams screen-ref + click — split into 1 action/step (§precondition)")
         if _pre_mode_tail(pe) or _pre_mode_tail(pj):
@@ -169,6 +188,10 @@ def main():
         for tok in FORBIDDEN:
             if tok in ee or tok in ej:
                 flags.append(f"№{tag} {cat1}: forbidden token '{tok}' in EXPECTED")
+        if _bundled_outcome(ee) or _bundled_outcome(ej):
+            flags.append(f"№{tag} {cat1}: EXPECTED bundles ≥2 outcomes on one line — split one per sub-line (§expected)")
+        if section.startswith("3.") and kind.strip() == "異常" and _vague_error_msg(ee):
+            flags.append(f"№{tag} {cat1}: S3 error EXPECTED paraphrases the message — quote the verbatim 「…」 (§expected / §be-first)")
 
     # §nav-button-modal (1b): the screen name (1.概要 N36) should match the user-facing page title.
     pt = None

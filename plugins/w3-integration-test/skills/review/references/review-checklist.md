@@ -34,19 +34,30 @@
   flag them **[Add]** if missing (see §5).
 
 ## 4. Validation / BVA  (→ `mimosa-rules.md` §s3-abnormal-only, §BVA, §form-field-validation, §row-guards)
-- **S3 = 異常 (rejection) cases ONLY** (§s3-abnormal-only). Flag any **正常 / boundary-PASS TC sitting
-  in S3** → **[Modify]** move it to S4.1; the 異常 counterpart stays in S3.
+- **S3 = 異常 cases + the BVA boundary cluster** (§s3-abnormal-only). Flag a **non-boundary 正常 TC
+  sitting in S3** → **[Modify]** move it to S4.1. But the **boundary triple (N-1/N/N+1) belongs
+  together in S3** — flag **[Modify]** if boundary-PASS (N-1/N) cases were scattered to S4.1; pull
+  them back to S3 next to the N+1 異常.
 - Row-count limits: `MAX_SELECTION=200`→E024, `MAX_TRANSIT_SELECTION=500`→E028, operator `<`
-  (n=limit PASS, n+1 FAIL). Boundary **SPLIT**: N+1 FAIL → S3 (異常); N-1/N PASS → S4.1 (正常).
-- Date-range filter (適用): N+1-day FAIL + start>end + **3 partial/empty-input cases** (only-from /
-  only-to / both-empty) in **S3**; N / N-1-day happy reloads in **S4.1**.
+  (n=limit PASS, n+1 FAIL). Boundary cluster **TOGETHER in S3**: N-1·N (正常) + N+1 FAIL (異常).
+- Date-range filter (適用): the whole cluster in **S3** — N-1·N-day happy reloads (正常) + N+1-day FAIL
+  + start>end + **3 partial/empty-input cases** (only-from / only-to / both-empty) (異常).
 - Row guards: `選択なし → E001` only where the controller actually checks 0 rows (not blanket).
 - **Form/edit screen**: per-field **異常** depth (→ §form-field-validation) — for each field by type:
   required-empty (**one TC per required field**) + all-required-empty + maxlength N+1 + numeric
   (**negative / zero** / out-of-range / non-numeric) + **invalid email** (if any) + **register-duplicate
   (既存コードと重複)** / edit-duplicate (unique key). Flag if S3 is shallow (only "required", missing
-  maxlength / numeric / negative-zero / duplicate / email). The matching 正常 cases (boundary-PASS,
-  valid email, **only-required-filled success**) belong in **S4.1**.
+  maxlength / numeric / negative-zero / duplicate / email). The **boundary-PASS (上限ちょうど /
+  下限ちょうど) cases stay in S3** with their 異常 counterpart (§BVA); only non-boundary accepted cases
+  (valid email, **only-required-filled success**) belong in **S4.1**.
+- **Date / numeric type depth** (§form-field-validation): a date field → wrong type (letters/special)
+  + wrong format (not YYYY-MM-DD) → `E040「有効な日付を年月日（YYYY-MM-DD）形式で…」` (異常→S3); a numeric
+  field also → `e` / exponent + special chars → `「…は半角数値で…」`. Flag **[Add]** if a date field has
+  no type/format TC, or a numeric field no `e` / non-numeric TC.
+- **S3 order** (§form-field-validation): single-field validation on top, cross-field / 全必須 / section
+  validation at the bottom → flag **[Modify]** if mixed/confusing.
+- **All-fields success** (§form-field-validation): a `全項目入力（必須＋任意）→ success` TC exists, not
+  only the `only-required` one → flag **[Add]** if missing.
 
 ## 4b. Form/edit/create extras  (→ `mimosa-rules.md` §verify-db, §concurrent-conflict)
 Only for form/edit/create screens (screen_type Edit-Form):
@@ -69,6 +80,12 @@ Only for form/edit/create screens (screen_type Edit-Form):
 - **Collapsible sections** — if the form has accordion sections (全て開く / 全て閉じる / per-section ≫,
   e.g. 469): toggle TCs in S4.1 (§form-accordion). Flag **[Add]** if missing. NOT the same as the
   list `展開ボタン→全画面表示` or grid `展開行` — flag **[Modify]** if mislabeled as those.
+- **Master-select 「キャンセル」** (§nav-button-modal) — a 検索/選択 modal has **ONE** representative
+  cancel TC (open → 「キャンセル」 → no selection applied, field unchanged). Flag **[Add]** if missing;
+  but do NOT expect one per modal, and the `×` icon stays excluded.
+- **Form S4.1 order** (§S4.1-order form override) — the field sub-flows (master-select / add-row /
+  accordion) come **before** the 登録/更新 success group. Flag **[Modify]** if 登録 success sits above
+  the field sub-flows.
 
 ## 5. CSV / 帳票  (→ `mimosa-rules.md` §csv-report)
 - CSV (`getCsv`) + 帳票 (`doPrint`) each = **1 happy-path (S4.1) + the symmetric guard errors in S3**:
@@ -100,6 +117,11 @@ Only for form/edit/create screens (screen_type Edit-Form):
   new-registration / edit mode`, `(empty form)`, `(the form is pre-filled …)`, `the selected record
   is loaded`): drop that tail (the mode is set by the select / don't-select step; the loaded data is
   what STEPS/EXPECTED verify).
+- **One outcome per line** (§expected): flag a long compound EXPECTED bundling ≥2 outcomes (error
+  modal + loading hides + no save + stays on form) on one line → **[Modify]** split into sub-numbered
+  lines (3.1 / 3.2 / …), one short sentence each.
+- **Validation message verbatim** (§expected / §be-first): an S3 error EXPECTED must quote the real
+  message 「…」 (+ E0xx), not a paraphrase like "a message indicating that X is required" → **[Modify]**.
 - **Each numbered / sub-numbered item on its own physical line** (output-rules §6): flag a run-on
   `1.1 … 1.2 … 1.3 …` cell → [Modify].
 - **Multi-field lists comma-separated, every field spelled out** (§enumerate): flag `・`/`&`/`;`-jammed
