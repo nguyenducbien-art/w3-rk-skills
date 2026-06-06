@@ -189,7 +189,9 @@ Read the code at this branch (or whatever the repo is currently checked out to).
 | Modal message codes | `app/Http/Controllers/Directs/MessageController.php` |
 | MAX constants | `resources/assets/javascripts/settings/Consts.js` |
 | API validation (`$rules`) | `app/Http/Controllers/API/<Entity>Controller.php` |
+| FormRequest validation | `app/Http/Requests/<Name>ApiRequest.php` (`rules()` + custom `validateOne`) |
 | Business validation | `app/Models/<Entity>Observer.php` |
+| 🔴 Validation **message templates** (verbatim) | `lang/ja/validation.php` (repo **ROOT** — Laravel 9+, NOT `resources/lang/`); resolve `:attribute`/`:min` (writing-rules §be-first) |
 
 > The hard facts already extracted from these files (modal codes, MAX values, helper
 > line numbers, CSV filename pattern) are cached in `mimosa-facts.md` — read that first,

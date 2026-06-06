@@ -144,6 +144,18 @@ Before writing any outcome/error/errorCode/message, read the BE: API `$rules` in
 `app/Models/<Entity>Observer.php` (`$this->RU(...)`), modal codes in `MessageController.php`.
 Don't stop at the message — understand the **full behavior** (success path, branches, what gets
 written); the deep-trace procedure is `analyze-screen.md` step 6.
+
+🔴 **FormRequest / Laravel-rule messages ARE verbatim-derivable — never conclude "dynamic / unknown".**
+Many screens validate via a **FormRequest** (`app/Http/Requests/<Name>ApiRequest.php` — its `rules()`
++ often a custom `validateOne` layer). Its per-field messages come from the Laravel rule templates in
+**`lang/ja/validation.php` (repo ROOT — Laravel 9+ moved `lang/` OUT of `resources/lang/`, so grep the
+root)**: e.g. `required`→`:attributeは必須項目です。`, `integer`/`numeric`→`:attribute は半角数値で入力
+してください。`, `min`(numeric)→`:attribute は :min 以上の値を入力してください。`, `min`(string)→`:attribute
+は :min 文字以上で入力してください。`, `digits_between`→`:attribute は :min から :max 桁以内…`. Resolve
+`:attribute` to the field's display label (the `attributes` map in that file, or the form's field
+label) and `:min`/`:max` to the limit, then quote the **full 「…」**. Date type/format/range → **E040**
+`「有効な日付を年月日（YYYY-MM-DD）形式で入力してください。」` in `MessageController`. 🚫 Never paraphrase
+("a message indicating X is required") — the verbatim text is right there to read.
 EXPECTED must be concrete: ✅ "server returns NG errorCode=1, popup 「引当数は必須項目です。」" —
 ❌ "if the server rejects it, an error popup is shown". Only test on stg when the BE is unclear
 (dynamic DB config) or visual behavior must be confirmed.
