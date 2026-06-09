@@ -7,6 +7,11 @@
       "name": "w3-integration-test",
       "source": "./plugins/w3-integration-test",
       "description": "Generate + review integration test-case specs (結合テスト仕様書) for W3 Mimosa AngularJS → Next.js migration screens."
+    },
+    {
+      "name": "w3-skill-authoring",
+      "source": "./plugins/w3-skill-authoring",
+      "description": "Contributor guide: how to author/extend skills in this marketplace, the conventions, and the git/version/release + dual-distribution flow."
     }
   ]
 }

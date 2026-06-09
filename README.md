@@ -11,6 +11,7 @@ This repo **is** the marketplace (`.claude-plugin/marketplace.json`) and hosts i
 | Plugin | Skills | Purpose |
 |---|---|---|
 | `w3-integration-test` | `generation`, `review` | Generate + review integration test-case specs (結合テスト仕様書) for one screen |
+| `w3-skill-authoring` | `authoring` | Contributor guide — how to add/extend skills here, the conventions, and the git/version/release + dual-distribution flow (read this before editing the repo) |
 
 ## Install (each teammate, once)
 
