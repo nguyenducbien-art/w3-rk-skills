@@ -1,6 +1,0 @@
-{
-  "name": "w3-skill-authoring",
-  "version": "1.0.0",
-  "description": "Contributor guide for the w3-rk-skills marketplace: how to author/extend skills in a plugin, the conventions (self-contained references, verify-heuristics, gen↔review lock-step), the git/version/auto-update release flow, and the plugin↔copy-paste dual-distribution discipline.",
-  "author": { "name": "BienND" }
-}
