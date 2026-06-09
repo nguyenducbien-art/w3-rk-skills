@@ -11,6 +11,11 @@
 These four checks are precisely the failure modes that **break the scaffold (足場)** when several child
 PRs each edit the same SSOT.
 
+🔴 **Scope: this script checks the SSOT only.** The sub-skill *mirror* counters (parity-review
+§A/§C/必須参照, orchestrator 内部フロー — `現在 N ID`, `Anti-Pattern N 個/項目`, etc.) are **not**
+script-checked; sweep them by hand at `§reconcile` (`conflict-resolution.md §verify-each-step` item 4).
+A green `verify: OK` here does **not** mean the mirrors are in sync.
+
 ## §no-dup-id
 
 A `{PREFIX}-NEW-{n}` rule ID must be **defined exactly once** in §2. Two definitions of the same ID

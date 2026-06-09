@@ -78,9 +78,17 @@ PRs). At §reconcile, trust the **grep-actual** numbers (`verify_scaffold.py` pr
 `§3 anti-patterns=…`) and set the declared counters to them in **one `chore:` commit**:
 - §0 新規追加 / 合計 / ID-table → the real §2 counts (fix even a long-standing wrong prefix count, e.g.
   `EDIT-NEW` table said 2 but §2 has 6).
-- **Mirror counters in sub-skills** drift too — reconcile them in the same pass. For W3 parity-review:
-  `現在 N ID` (×several) + the per-prefix breakdown + `Anti-Pattern N 項目` + `1〜N 通し番号` — tie the
-  ID number to the §2 count, the 項目/通し番号 to §3's anti-pattern count.
+- **Mirror counters in sub-skills drift too — sweep EVERY sub-skill, not just one** (a real miss: the
+  first pass reconciled parity-review but left the orchestrator + a `個`-spelling stale; a PR reviewer
+  caught them). The W3 mirror locations, all tied to the grep-actual §2 (ID) / §3 (anti-pattern) counts:
+  - **parity-review**: §A `現在 N ID` (×several) + the per-prefix breakdown; §C `Anti-Pattern N 項目`
+    (×3) + `1〜N 通し番号`; the 必須参照 list's `(規約 ID 全件 + Anti-Pattern N 個)`.
+  - **orchestrator**: the `内部フロー` block — `規約 ID 全件 (約 N 件)` + `Anti-Pattern N 項目 grep`; do
+    **not** hard-code a common-TC count (`16 共通 TC` is wrong — parity-review §D itself says the TC
+    count is the scanned-CSV actual, never a fixed 16).
+  - 🔴 **The same count appears in three spellings — `N 個` / `N 項目` / `N 件` — across several files.**
+    A sweep that matches one spelling in one file misses the rest (it did). Grep all spellings, all
+    sub-skills (`§verify-each-step` item 4). Tie the ID number to §2, the 個/項目/通し番号 to §3.
 
 Pick a defensible interpretation when a loose label is ambiguous (e.g. tie "Anti-Pattern N 項目" to §3
 = the authoritative anti-pattern count, since the surrounding text says "§3 から抽出 / 1〜N 通し番号").
@@ -88,13 +96,23 @@ Finish with a sweep that no old number string remains anywhere, and `verify_scaf
 
 ## §verify-each-step
 
-After **every** per-PR apply, before committing, do all three — a clean `git diff` is not enough:
+After **every** per-PR apply (and especially the §reconcile pass), before committing, do all four —
+a clean `git diff` is not enough:
 1. `python3 scripts/verify_scaffold.py <SSOT>` → `OK` (no dup ID, counters consistent).
 2. **Phrase presence**: `grep -cF` a distinctive phrase from each change the PR intended — each = 1.
    (`grep` with backticks in the pattern: include them, or pick a phrase without them.)
 3. **No stray collision ID**: in files where you renamed `X→Y`, `grep -c 'X'` of the renamed concept
    = 0 (the only `X` left should be the legitimate keeper's, in its own file). And the renamed ID `Y`
    appears the expected number of times.
+4. **Counter-mirror sweep** (run at §reconcile, across ALL sub-skill SKILLs — `verify_scaffold.py`
+   checks the SSOT only, NOT the mirrors). Grep every counter spelling and reconcile each hit to the
+   grep-actual §2/§3 numbers:
+   ```bash
+   grep -rnE '(Anti-Pattern|規約)[^|]{0,8}[0-9]+ ?(個|項目|件)|現在 ?[0-9]+ ?(ID|件)' <repo>/.claude/skills
+   ```
+   Eyeball each hit: a count ≠ the §2 rule total / §3 anti-pattern total is stale. The mirrors live in
+   several files (parity-review §A/§C/必須参照, orchestrator 内部フロー) — never sweep just one file or
+   one spelling.
 
 A grep that returns 0 where you expect ≥1 (or vice-versa) means an edit silently failed or a rename
 was missed — fix before committing.

@@ -60,6 +60,13 @@ ID-table `EDIT-NEW` said 2 but §2 had `EDIT-NEW-01..06` (=6). One `chore:` comm
 `Anti-Pattern 25 項目`→**36** (tied to §3=36), `1〜25 通し番号`→`1〜36`. Final `verify_scaffold.py`:
 `OK (§2 rules=97, §3 anti-patterns=36, declared 新規追加=97 / Anti-Pattern=36)`.
 
+**Lesson (a PR reviewer / Copilot caught what this pass missed):** the first reconcile fixed
+parity-review but left two mirrors stale — orchestrator's `内部フロー` (`規約 約72`→97, `Anti-Pattern
+16 項目`→36, and a hard-coded `16 共通 TC` that parity-review §D itself calls wrong) and parity-review's
+必須参照 line `Anti-Pattern 25 個` (a `個` spelling the `項目` sweep didn't match). Both were `verify_scaffold.py`-clean (the script checks the SSOT, not the mirrors). Fix: sweep **every** sub-skill
+and **every** spelling (`個` / `項目` / `件`) at `§reconcile` — `conflict-resolution.md §verify-each-step`
+item 4. This is exactly why §counter-reconcile now enumerates the mirror locations.
+
 ## §finish
 
 5 commits on the integration branch (4 integrations + 1 reconcile). Then, **on the user's explicit
