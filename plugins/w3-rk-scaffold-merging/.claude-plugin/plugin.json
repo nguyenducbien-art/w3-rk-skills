@@ -1,0 +1,6 @@
+{
+  "name": "w3-rk-scaffold-merging",
+  "version": "1.0.0",
+  "description": "W3 Mimosa scaffold merging: /merge integrates several child PRs that edit the same Kanaya code-gen SSOT + frontend-screen-* SKILLs into one branch — resolving rule-ID collisions, duplicate rules and §0 counter drift by hand (verified by verify_scaffold.py) so the scaffold (足場) never breaks.",
+  "author": { "name": "BienND" }
+}

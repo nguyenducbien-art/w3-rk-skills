@@ -11,6 +11,7 @@ This repo **is** the marketplace (`.claude-plugin/marketplace.json`) and hosts i
 | Plugin | Skills | Purpose |
 |---|---|---|
 | `w3-integration-test` | `generation`, `review` | Generate + review integration test-case specs (結合テスト仕様書) for one screen |
+| `w3-rk-scaffold-merging` | `merge` | Merge several child scaffold PRs (same SSOT + `frontend-screen-*` SKILLs) into one integration branch — resolve ID collisions / duplicate rules / §0 counter drift by hand |
 
 > Adding or extending a skill? Read **`CONTRIBUTING.md`** first.
 
@@ -19,6 +20,7 @@ This repo **is** the marketplace (`.claude-plugin/marketplace.json`) and hosts i
 ```
 /plugin marketplace add <git-url-of-this-repo>      # e.g. git@<host>:<org>/w3-rk-skills.git
 /plugin install w3-integration-test@w3-rk-skills
+/plugin install w3-rk-scaffold-merging@w3-rk-skills   # scaffold-PR merging
 ```
 
 Then enable **auto-update** so you always get the latest: `/plugin` → **Marketplaces** tab → toggle
@@ -143,9 +145,13 @@ auto-update enabled then get it on their next session.
 w3-rk-skills/
 ├── .claude-plugin/marketplace.json
 └── plugins/
-    └── w3-integration-test/
+    ├── w3-integration-test/
+    │   ├── .claude-plugin/plugin.json
+    │   └── skills/
+    │       ├── generation/   (SKILL.md · references/ · scripts/ · assets/)
+    │       └── review/        (SKILL.md · references/ · scripts/)
+    └── w3-rk-scaffold-merging/
         ├── .claude-plugin/plugin.json
         └── skills/
-            ├── generation/   (SKILL.md · references/ · scripts/ · assets/)
-            └── review/        (SKILL.md · references/ · scripts/)
+            └── merge/         (SKILL.md · references/ · scripts/verify_scaffold.py)
 ```

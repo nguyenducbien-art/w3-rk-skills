@@ -7,6 +7,11 @@
       "name": "w3-integration-test",
       "source": "./plugins/w3-integration-test",
       "description": "Generate + review integration test-case specs (結合テスト仕様書) for W3 Mimosa AngularJS → Next.js migration screens."
+    },
+    {
+      "name": "w3-rk-scaffold-merging",
+      "source": "./plugins/w3-rk-scaffold-merging",
+      "description": "Merge several child scaffold PRs (same Kanaya code-gen SSOT + frontend-screen-* SKILLs) into one integration branch — resolving rule-ID collisions, duplicate rules and §0 counter drift by hand so the scaffold (足場) never breaks."
     }
   ]
 }
